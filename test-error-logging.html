@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error Logging Test</title>
+</head>
+<body>
+    <h1>Error Logging Test</h1>
+    <button onclick="testErrorLogging()">Test Error Logging</button>
+    <button onclick="testNetworkError()">Test Network Error</button>
+    <button onclick="testAuthError()">Test Auth Error</button>
+    
+    <div id="results"></div>
+
+    <script type="module">
+        // Import the ErrorHandler (simulated for testing)
+        class TestErrorHandler {
+            constructor() {
+                this.errorCategories = {
+                    NETWORK: 'network',
+                    AUTHENTICATION: 'authentication',
+                    SERVER: 'server'
+                };
+            }
+            
+            formatTimestamp() {
+                const now = new Date();
+                const year = now.getFullYear();
+                const month = String(now.getMonth() + 1).padStart(2, '0');
+                const day = String(now.getDate()).padStart(2, '0');
+                const hours = String(now.getHours()).padStart(2, '0');
+                const minutes = String(now.getMinutes()).padStart(2, '0');
+                const seconds = String(now.getSeconds()).padStart(2, '0');
+                const milliseconds = String(now.getMilliseconds()).padStart(3, '0');
+                
+                return `[${year}-${month}-${day} ${hours}:${minutes}:${seconds}:${milliseconds}]`;
+            }
+            
+            async writeToFile(message) {
+                try {
+                    const response = await fetch('/api/logs/error', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            message: message,
+                            timestamp: new Date().toISOString()
+                        })
+                    });
+                    
+                    const result = await response.json();
+                    return result.success;
+                } catch (error) {
+                    console.error('Failed to write to log file:', error);
+                    return false;
+                }
+            }
+            
+            async logError(errorMessage, source = 'test_system') {
+                const timestamp = this.formatTimestamp();
+                const formattedMessage = `${timestamp} [${source}] ${errorMessage}`;
+                
+                console.log('Logging error:', formattedMessage);
+                
+                const success = await this.writeToFile(formattedMessage);
+                
+                if (success) {
+                    document.getElementById('results').innerHTML += 
+                        `<p style="color: green;">✅ Successfully logged: ${formattedMessage}</p>`;
+                } else {
+                    document.getElementById('results').innerHTML += 
+                        `<p style="color: red;">❌ Failed to log error</p>`;
+                }
+            }
+        }
+        
+        const errorHandler = new TestErrorHandler();
+        
+        window.testErrorLogging = async function() {
+            await errorHandler.logError('Test error message from frontend', 'admin_connector');
+        };
+        
+        window.testNetworkError = async function() {
+            await errorHandler.logError('Network error: Failed to connect to server', 'admin_connector');
+        };
+        
+        window.testAuthError = async function() {
+            await errorHandler.logError('Authentication failed: Invalid credentials provided', 'admin_connector');
+        };
+    </script>
+</body>
+</html>

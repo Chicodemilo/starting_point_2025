@@ -1,0 +1,99 @@
+## Project Roadmap: The Right to Remain Fucked
+
+This document outlines the development plan, broken down into logical phases.
+
+---
+
+### Phase 1: Foundation & Backend Core
+
+*Goal: Establish a working backend API with a database connection and core data models.*
+
+1.  **Docker & Environment Setup**
+    *   Finalize `docker-compose.yml` to define the `api`, `frontend`, `db`, and `nginx` services.
+    *   Configure `.env` and `docker-compose.local.yml` with the correct non-standard ports (5151, 3151, 3316).
+    *   Ensure the Flask `api` container can successfully connect to the `mysql` container.
+
+2.  **Database Schema & Models**
+    *   Define the initial table structures in `mysql/init/01-init-db.sql` based on the "Data Models" section of the README.
+    *   Implement the corresponding Flask-SQLAlchemy models in `api/app/models/`.
+
+3.  **Base Admin Screen Implementation**
+    *   Create the foundational admin interface components accessible via the `/overview` route.
+    *   Build basic admin dashboard layout with navigation and content areas.
+    *   Implement data display components for viewing users, categories, evidence, and votes.
+    *   Create basic CRUD interface elements (view, edit, delete buttons) without full functionality.
+    *   Set up admin-specific routing and component structure for future authentication integration.
+
+4.  **User Authentication API**
+    *   Create API endpoints in `api/app/routes/` for user registration and login.
+    *   Implement password hashing using a library like Werkzeug.
+    *   Set up JWT generation upon successful login and a decorator to protect specific routes.
+
+---
+
+### Phase 2: Core Application Logic & API Endpoints
+
+*Goal: Build the API endpoints required for the main application features.*
+
+1.  **Category & Evidence Endpoints**
+    *   Create endpoints to `GET` all approved categories.
+    *   Create a protected endpoint to `POST` a new user-submitted category (marked as unapproved).
+    *   Create endpoints to `GET` all approved evidence for a given category.
+    *   Create a protected endpoint to `POST` new user-submitted evidence.
+
+2.  **Voting & Score Calculation**
+    *   Create a protected endpoint to `POST` a vote (+1 or -1) on a piece of evidence.
+    *   Implement the "Fucked Score" calculation logic within the API, ready to be consumed by the frontend.
+
+---
+
+### Phase 3: Frontend Development & UI
+
+*Goal: Build a functional user interface that interacts with the backend API.*
+
+1.  **Component & Layout Scaffolding**
+    *   Build out the main static layout components (`Header`, `BodyContainer`, `Categories` panel, `Results` panel).
+    *   Implement the various modal shells (`LoginRegisterModal`, `NewEvidenceModal`, etc.).
+
+2.  **State Management & API Integration**
+    *   Set up the Zustand `mainStore` to manage application state (categories, evidence, user session).
+    *   Develop API service functions to fetch data from the backend and populate the store.
+    *   Connect components to the store to display dynamic data.
+
+3.  **Interactive Functionality**
+    *   Implement the category selection logic.
+    *   Display the `FuckedMeter` and evidence list based on selected categories.
+    *   Wire up the forms within the modals to submit data to the API.
+
+---
+
+### Phase 4: Admin & Refinement
+
+*Goal: Create moderation tools and finalize the application for production.*
+
+1.  **Admin Dashboard**
+    *   Build a protected admin view for reviewing and approving/rejecting user-submitted content.
+    *   Create the necessary backend endpoints to support these admin actions.
+
+2.  **Styling & Final Touches**
+    *   Apply consistent styling to all components using the dedicated CSS files and Tailwind CSS.
+    *   Perform end-to-end testing of all user flows.
+
+---
+
+### Phase 5: Production Deployment (GCP)
+
+*Goal: Deploy the application to a live production environment on Google Cloud Platform.*
+
+1.  **Infrastructure Setup**
+    *   Configure GCP project, billing, and necessary APIs (Cloud Run, Cloud SQL, Container Registry).
+    *   Set up a production MySQL instance on Cloud SQL and manage production secrets.
+
+2.  **Containerization & Deployment**
+    *   Finalize `docker-compose.prod.yml` for a production environment.
+    *   Build and push production-ready Docker images to Google Container Registry (GCR).
+    *   Complete and execute the `deploy_gcp.sh` script to deploy services to Cloud Run.
+
+3.  **Security & Finalization**
+    *   Configure NGINX as a reverse proxy for the frontend and backend services.
+    *   Secure the application by setting up a domain, SSL certificate, and restricting CORS origins.

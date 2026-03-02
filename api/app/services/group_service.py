@@ -1,8 +1,10 @@
 from app import db
 from app.models.group import Group
 from app.models.group_member import GroupMember
+from app.models.user import User
 from app.config.group_types import is_valid_type
 from app.services.messaging_service import MessagingService
+from app.utils.email import send_group_invite_email
 import logging
 
 logger = logging.getLogger(__name__)
@@ -193,6 +195,35 @@ class GroupService:
         db.session.delete(member)
         db.session.commit()
         return True, None
+
+    @staticmethod
+    def invite_member_by_email(group_id, email, requester_id):
+        """Invite a user to a group by email. If user exists, add them. If not, send invite email."""
+        requester = GroupMember.query.filter_by(
+            group_id=group_id, user_id=requester_id
+        ).first()
+        if not requester or requester.role not in ('owner', 'admin'):
+            return None, 'Permission denied'
+
+        group = Group.query.get(group_id)
+        if not group:
+            return None, 'Group not found'
+
+        existing_user = User.query.filter_by(email=email).first()
+        if existing_user:
+            already = GroupMember.query.filter_by(
+                group_id=group_id, user_id=existing_user.id
+            ).first()
+            if already:
+                return None, 'User is already a member'
+            member = GroupMember(group_id=group_id, user_id=existing_user.id, role='member')
+            db.session.add(member)
+            db.session.commit()
+            MessagingService.add_member_to_group_conversation(group_id, existing_user.id)
+            return {'message': 'User added to group', 'member': member.to_dict(), 'status': 'added'}, None
+        else:
+            send_group_invite_email(email, group.name, group.invite_code)
+            return {'message': f'Invite sent to {email}', 'status': 'invited'}, None
 
     @staticmethod
     def regenerate_invite(group_id, requester_id):

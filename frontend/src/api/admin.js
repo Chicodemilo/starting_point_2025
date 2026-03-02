@@ -58,3 +58,37 @@ export const getAdminTestResults = async () => {
   const { data } = await client.get('/api/admin/test-results');
   return data;
 };
+
+// Terms & Conditions
+export const getAdminTerms = async () => {
+  const { data } = await client.get('/api/admin/terms');
+  return data;
+};
+
+export const updateAdminTerms = async (content) => {
+  const { data } = await client.put('/api/admin/terms', { content });
+  return data;
+};
+
+export const resetAllTerms = async () => {
+  const { data } = await client.post('/api/admin/terms/reset');
+  return data;
+};
+
+// Invites
+export const inviteUser = async (email) => {
+  const { data } = await client.post('/api/admin/invite', { email });
+  return data;
+};
+
+// Admin users
+export const getAdminUsers = async () => {
+  const { data } = await client.get('/api/admin/admin-users');
+  return data;
+};
+
+// Permissions
+export const updateUserPermissions = async (userId, permissions) => {
+  const { data } = await client.put(`/api/admin/users/${userId}/permissions`, { permissions });
+  return data;
+};

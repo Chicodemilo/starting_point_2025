@@ -2,6 +2,7 @@ from app import db
 from datetime import datetime
 from werkzeug.security import check_password_hash, generate_password_hash
 import secrets
+import json
 
 
 class User(db.Model):
@@ -16,6 +17,19 @@ class User(db.Model):
     verification_token = db.Column(db.String(255), nullable=True)
     verification_sent_at = db.Column(db.DateTime, nullable=True)
     active_group_id = db.Column(db.Integer, db.ForeignKey('group.id', ondelete='SET NULL'), nullable=True)
+    # Terms & Conditions
+    terms_accepted = db.Column(db.Boolean, default=False, nullable=False)
+    terms_accepted_at = db.Column(db.DateTime, nullable=True)
+    # Email change (pending until verified)
+    pending_email = db.Column(db.String(100), nullable=True)
+    pending_email_token = db.Column(db.String(255), nullable=True)
+    # Admin invite
+    invite_token = db.Column(db.String(255), nullable=True)
+    invited_by = db.Column(db.Integer, nullable=True)
+    # Admin section permissions (JSON string)
+    admin_permissions = db.Column(db.Text, nullable=True)
+    # Avatar
+    avatar = db.Column(db.String(255), nullable=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
     def __repr__(self):
@@ -32,13 +46,46 @@ class User(db.Model):
         self.verification_sent_at = datetime.utcnow()
         return self.verification_token
 
+    def generate_pending_email_token(self):
+        self.pending_email_token = secrets.token_urlsafe(32)
+        return self.pending_email_token
+
+    def generate_invite_token(self):
+        self.invite_token = secrets.token_urlsafe(32)
+        return self.invite_token
+
+    def get_admin_permissions(self):
+        if not self.admin_permissions:
+            return {}
+        try:
+            return json.loads(self.admin_permissions)
+        except (json.JSONDecodeError, TypeError):
+            return {}
+
+    def set_admin_permissions(self, perms):
+        self.admin_permissions = json.dumps(perms)
+
+    def has_admin_section(self, section):
+        if not self.is_admin:
+            return False
+        perms = self.get_admin_permissions()
+        if not perms:
+            return True  # No restrictions set = full access
+        return perms.get(section, False)
+
     def to_dict(self):
-        return {
+        d = {
             'id': self.id,
             'username': self.username,
             'email': self.email,
             'is_admin': self.is_admin,
             'email_verified': self.email_verified,
             'active_group_id': self.active_group_id,
-            'created_at': self.created_at.isoformat() if self.created_at else None
+            'terms_accepted': self.terms_accepted,
+            'terms_accepted_at': self.terms_accepted_at.isoformat() if self.terms_accepted_at else None,
+            'pending_email': self.pending_email,
+            'admin_permissions': self.get_admin_permissions(),
+            'avatar': self.avatar,
+            'created_at': self.created_at.isoformat() if self.created_at else None,
         }
+        return d

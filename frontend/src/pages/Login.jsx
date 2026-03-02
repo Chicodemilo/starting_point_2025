@@ -11,8 +11,12 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await login(username, password);
-      navigate('/');
+      const data = await login(username, password);
+      if (data.user && !data.user.terms_accepted) {
+        navigate('/terms');
+      } else {
+        navigate('/');
+      }
     } catch {
       // Error is set in store
     }

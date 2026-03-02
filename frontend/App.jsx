@@ -6,11 +6,15 @@ import Register from './src/pages/Register';
 import Dashboard from './src/pages/Dashboard';
 import Groups from './src/pages/Groups';
 import GroupDetail from './src/pages/GroupDetail';
+import GroupAdmin from './src/pages/GroupAdmin';
 import VerifyEmail from './src/pages/VerifyEmail';
 import CheckEmail from './src/pages/CheckEmail';
 import GroupPicker from './src/pages/GroupPicker';
 import Inbox from './src/pages/Inbox';
 import MessageThread from './src/pages/MessageThread';
+import Profile from './src/pages/Profile';
+import Terms from './src/pages/Terms';
+import Invite from './src/pages/Invite';
 import AdminLayout from './src/pages/admin/AdminLayout';
 
 function App() {
@@ -26,7 +30,11 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/groups" element={<Groups />} />
           <Route path="/groups/:id" element={<GroupDetail />} />
+          <Route path="/groups/:id/admin" element={<GroupAdmin />} />
           <Route path="/group-picker" element={<GroupPicker />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/invite" element={<Invite />} />
           <Route path="/inbox" element={<Inbox />} />
           <Route path="/inbox/conversation/:id" element={<MessageThread />} />
           <Route path="/overview/*" element={<AdminLayout />} />

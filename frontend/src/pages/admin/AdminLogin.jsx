@@ -11,44 +11,52 @@ function AdminLogin({ onLogin }) {
     try {
       await login(email, password);
       if (onLogin) onLogin();
-    } catch {
-      // Error is set in store
-    }
+    } catch {}
   };
 
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#ecf0f1', padding: '20px' }}>
-      <div style={{ backgroundColor: 'white', padding: '40px', borderRadius: '12px', boxShadow: '0 4px 6px rgba(0,0,0,0.1)', width: '100%', maxWidth: '400px' }}>
-        <div style={{ textAlign: 'center', marginBottom: '30px' }}>
-          <h1 style={{ color: '#2c3e50', margin: '0 0 10px 0', fontSize: '1.8em' }}>Admin Login</h1>
-          <p style={{ color: '#7f8c8d', margin: 0, fontSize: '14px' }}>Administrative Access</p>
+    <div style={t.wrapper}>
+      <div style={t.box}>
+        <div style={t.header}>
+          <span style={t.prompt}>$</span> admin_login
         </div>
 
         <form onSubmit={handleSubmit}>
-          <div style={{ marginBottom: '20px' }}>
-            <label style={{ display: 'block', marginBottom: '8px', fontWeight: '500' }}>Email</label>
-            <input type="email" value={email} onChange={(e) => { setEmail(e.target.value); clearError(); }} required style={inputStyle} placeholder="admin@example.com" />
+          <div style={t.field}>
+            <label style={t.label}>email:</label>
+            <input type="email" value={email} onChange={(e) => { setEmail(e.target.value); clearError(); }} required style={t.input} placeholder="admin@example.com" />
           </div>
-          <div style={{ marginBottom: '25px' }}>
-            <label style={{ display: 'block', marginBottom: '8px', fontWeight: '500' }}>Password</label>
-            <input type="password" value={password} onChange={(e) => { setPassword(e.target.value); clearError(); }} required style={inputStyle} />
+          <div style={t.field}>
+            <label style={t.label}>password:</label>
+            <input type="password" value={password} onChange={(e) => { setPassword(e.target.value); clearError(); }} required style={t.input} />
           </div>
 
-          {error && <div style={errorStyle}>{error}</div>}
+          {error && <div style={t.error}>[error] {error}</div>}
 
-          <button type="submit" disabled={loading} style={submitStyle}>{loading ? 'Signing In...' : 'Sign In'}</button>
+          <button type="submit" disabled={loading} style={t.submit}>
+            {loading ? '> authenticating...' : '> authenticate'}
+          </button>
         </form>
 
-        <p style={{ textAlign: 'center', marginTop: '20px', fontSize: '12px', color: '#7f8c8d' }}>
-          Dev credentials: <strong>admin@example.com</strong> / <strong>admin123</strong>
-        </p>
+        <div style={t.hint}>
+          dev: admin@example.com / admin123
+        </div>
       </div>
     </div>
   );
 }
 
-const inputStyle = { width: '100%', padding: '12px', border: '2px solid #bdc3c7', borderRadius: '6px', fontSize: '16px', boxSizing: 'border-box' };
-const errorStyle = { backgroundColor: '#f8d7da', color: '#721c24', padding: '10px', borderRadius: '4px', marginBottom: '20px', fontSize: '14px' };
-const submitStyle = { width: '100%', backgroundColor: '#2c3e50', color: 'white', border: 'none', padding: '14px', borderRadius: '6px', fontSize: '16px', cursor: 'pointer' };
+const t = {
+  wrapper: { minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#0a0a0a', fontFamily: "'SF Mono', 'Fira Code', Consolas, monospace" },
+  box: { width: '100%', maxWidth: '420px', padding: '32px', border: '1px solid #1f1f1f', backgroundColor: '#111111' },
+  header: { fontSize: '16px', color: '#4ade80', marginBottom: '24px' },
+  prompt: { color: '#4ade80', marginRight: '6px' },
+  field: { marginBottom: '16px' },
+  label: { display: 'block', marginBottom: '6px', color: '#9ca3af', fontSize: '13px' },
+  input: { width: '100%', padding: '10px 12px', backgroundColor: '#0a0a0a', border: '1px solid #2a2a2a', color: '#d1d5db', fontSize: '14px', fontFamily: 'inherit', boxSizing: 'border-box', outline: 'none' },
+  error: { color: '#ef4444', padding: '8px 0', fontSize: '13px', marginBottom: '8px' },
+  submit: { width: '100%', padding: '12px', backgroundColor: '#1a1a1a', color: '#4ade80', border: '1px solid #2a2a2a', fontSize: '14px', fontFamily: 'inherit', cursor: 'pointer', letterSpacing: '0.02em' },
+  hint: { marginTop: '16px', fontSize: '11px', color: '#4b5563', textAlign: 'center' },
+};
 
 export default AdminLogin;

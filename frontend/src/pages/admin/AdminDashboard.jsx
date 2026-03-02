@@ -8,42 +8,50 @@ function AdminDashboard() {
 
   return (
     <div>
-      <h1>Dashboard</h1>
+      <h1 style={t.h1}><span style={t.prompt}>$</span> dashboard</h1>
 
-      {loading && <p>Loading stats...</p>}
+      {loading && <p style={t.muted}>loading stats...</p>}
 
       {stats && (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: '16px', margin: '24px 0' }}>
-          <StatCard label="Total Users" value={stats.users} color="#3498db" />
-          <StatCard label="Total Groups" value={stats.groups} color="#27ae60" />
-          <StatCard label="Total Items" value={stats.items} color="#9b59b6" />
-          <StatCard label="Alerts" value={stats.alerts || 0} color="#e67e22" />
-          <StatCard label="Messages" value={stats.messages || 0} color="#1abc9c" />
-          <StatCard label="Signups (7d)" value={stats.recent_signups} color="#e74c3c" />
+        <div style={t.grid}>
+          <StatCard label="users" value={stats.users} />
+          <StatCard label="groups" value={stats.groups} />
+          <StatCard label="items" value={stats.items} />
+          <StatCard label="alerts" value={stats.alerts || 0} />
+          <StatCard label="messages" value={stats.messages || 0} />
+          <StatCard label="signups_7d" value={stats.recent_signups} />
         </div>
       )}
 
-      <h2>Quick Links</h2>
-      <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-        <a href="/overview/users" style={linkCard}>Manage Users</a>
-        <a href="/overview/groups" style={linkCard}>Manage Groups</a>
-        <a href="/overview/alerts" style={linkCard}>Manage Alerts</a>
-        <a href="/overview/messages" style={linkCard}>Manage Messages</a>
-        <a href="/overview/health" style={linkCard}>System Health</a>
+      <h2 style={t.h2}>quick_links</h2>
+      <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+        {['users', 'groups', 'alerts', 'messages', 'health', 'terms'].map(s => (
+          <a key={s} href={`/overview/${s}`} style={t.link}>> {s}</a>
+        ))}
       </div>
     </div>
   );
 }
 
-function StatCard({ label, value, color }) {
+function StatCard({ label, value }) {
   return (
-    <div style={{ padding: '24px', backgroundColor: '#fff', borderRadius: '8px', border: '1px solid #dee2e6', borderTop: `4px solid ${color}`, textAlign: 'center' }}>
-      <h2 style={{ margin: '0 0 8px 0', fontSize: '2em', color }}>{value}</h2>
-      <p style={{ margin: 0, color: '#7f8c8d' }}>{label}</p>
+    <div style={t.card}>
+      <div style={t.cardValue}>{value}</div>
+      <div style={t.cardLabel}>{label}</div>
     </div>
   );
 }
 
-const linkCard = { display: 'inline-block', padding: '16px 24px', backgroundColor: '#f8f9fa', borderRadius: '8px', border: '1px solid #dee2e6', textDecoration: 'none', color: '#2c3e50', fontWeight: '500' };
+const t = {
+  h1: { fontSize: '18px', color: '#4ade80', fontWeight: 'normal', margin: '0 0 24px', fontFamily: 'inherit' },
+  h2: { fontSize: '14px', color: '#9ca3af', fontWeight: 'normal', margin: '32px 0 12px' },
+  prompt: { color: '#4ade80' },
+  muted: { color: '#6b7280', fontSize: '13px' },
+  grid: { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '12px' },
+  card: { padding: '20px', backgroundColor: '#111111', border: '1px solid #1f1f1f', textAlign: 'center' },
+  cardValue: { fontSize: '28px', color: '#4ade80', fontWeight: 'bold', marginBottom: '4px' },
+  cardLabel: { fontSize: '12px', color: '#6b7280', letterSpacing: '0.05em' },
+  link: { display: 'inline-block', padding: '8px 16px', backgroundColor: '#111111', border: '1px solid #1f1f1f', textDecoration: 'none', color: '#9ca3af', fontSize: '13px', fontFamily: 'inherit' },
+};
 
 export default AdminDashboard;

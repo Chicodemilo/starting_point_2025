@@ -49,3 +49,17 @@ export const removeMember = async (groupId, userId) => {
   const { data } = await client.delete(`/api/groups/${groupId}/members/${userId}`);
   return data;
 };
+
+export const uploadGroupIcon = async (groupId, file) => {
+  const formData = new FormData();
+  formData.append('file', file);
+  const { data } = await client.post(`/api/uploads/group/${groupId}/icon`, formData, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  });
+  return data.group;
+};
+
+export const inviteMemberByEmail = async (groupId, email) => {
+  const { data } = await client.post(`/api/groups/${groupId}/invite-email`, { email });
+  return data;
+};

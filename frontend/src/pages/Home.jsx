@@ -1,10 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import useAuthStore from '../store/authStore';
 
 const APP_NAME = import.meta.env.VITE_APP_NAME || 'My App';
 
 function Home() {
   const { user, isAuthenticated } = useAuthStore();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isAuthenticated() && user && !user.terms_accepted) {
+      navigate('/terms');
+    }
+  }, [user]);
 
   return (
     <div style={{ padding: '20px', maxWidth: '800px', margin: '0 auto' }}>
@@ -31,6 +39,10 @@ function Home() {
           <a href="/dashboard" style={cardStyle}>
             <h3>Dashboard</h3>
             <p>View your activity and items</p>
+          </a>
+          <a href="/profile" style={cardStyle}>
+            <h3>Profile</h3>
+            <p>View your profile and settings</p>
           </a>
         </div>
       )}

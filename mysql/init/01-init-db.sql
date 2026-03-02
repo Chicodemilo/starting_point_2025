@@ -14,8 +14,32 @@ CREATE TABLE IF NOT EXISTS user (
     verification_token VARCHAR(255),
     verification_sent_at TIMESTAMP NULL,
     active_group_id INT,
+    terms_accepted BOOLEAN DEFAULT FALSE,
+    terms_accepted_at TIMESTAMP NULL,
+    pending_email VARCHAR(120),
+    pending_email_token VARCHAR(255),
+    invite_token VARCHAR(255),
+    invited_by INT,
+    admin_permissions TEXT,
+    avatar VARCHAR(255),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- Create terms_content table (admin-managed terms & conditions)
+CREATE TABLE IF NOT EXISTS terms_content (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    content TEXT NOT NULL,
+    version INT NOT NULL DEFAULT 1,
+    updated_by INT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- Seed default terms
+INSERT INTO terms_content (content, version) VALUES (
+    'These are the placeholder terms and conditions for this application. The administrator can update these at any time from the admin panel.',
+    1
 );
 
 -- Create group table
@@ -27,6 +51,7 @@ CREATE TABLE IF NOT EXISTS `group` (
     is_private BOOLEAN DEFAULT TRUE,
     owner_id INT NOT NULL,
     invite_code VARCHAR(20) UNIQUE,
+    icon VARCHAR(255),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (owner_id) REFERENCES user(id) ON DELETE CASCADE

@@ -124,6 +124,28 @@ def regenerate_invite(group_id):
     return jsonify({'invite_code': code}), 200
 
 
+@groups_bp.route('/<int:group_id>/invite-email', methods=['POST'])
+@moderate_rate_limit
+@token_required
+def invite_member_by_email(group_id):
+    """Invite a user to a group by email (owner/admin only)"""
+    data = request.get_json()
+    email = data.get('email') if data else None
+    if not email:
+        return jsonify({'error': 'Email required'}), 400
+
+    result, error = GroupService.invite_member_by_email(
+        group_id=group_id,
+        email=email,
+        requester_id=g.current_user['user_id']
+    )
+    if error:
+        status = 403 if 'Permission' in error else 400
+        return jsonify({'error': error}), status
+
+    return jsonify(result), 200
+
+
 @groups_bp.route('/<int:group_id>/members', methods=['POST'])
 @moderate_rate_limit
 @token_required

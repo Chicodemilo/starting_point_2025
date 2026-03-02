@@ -6,6 +6,7 @@ from .config import config_bp
 from .logs import logs_bp
 from .alerts import alerts_bp
 from .conversations import conversations_bp
+from .uploads import uploads_bp
 
 
 def register_blueprints(app):
@@ -18,3 +19,4 @@ def register_blueprints(app):
     app.register_blueprint(logs_bp, url_prefix='/api/logs')
     app.register_blueprint(alerts_bp, url_prefix='/api/alerts')
     app.register_blueprint(conversations_bp, url_prefix='/api/conversations')
+    app.register_blueprint(uploads_bp, url_prefix='/api/uploads')

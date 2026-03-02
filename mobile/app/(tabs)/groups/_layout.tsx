@@ -8,6 +8,7 @@ export default function GroupsLayout() {
       <Stack.Screen name="join" options={{ title: 'Join Group' }} />
       <Stack.Screen name="[id]" options={{ title: 'Group Details' }} />
       <Stack.Screen name="picker" options={{ title: 'Pick Active Group' }} />
+      <Stack.Screen name="admin" options={{ title: 'Manage Group' }} />
     </Stack>
   );
 }

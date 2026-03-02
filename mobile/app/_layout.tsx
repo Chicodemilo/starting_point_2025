@@ -47,25 +47,33 @@ export default function RootLayout() {
 
 function RootLayoutNav() {
   const colorScheme = useColorScheme();
-  const { token } = useAuthStore();
+  const { token, user } = useAuthStore();
   const segments = useSegments();
   const router = useRouter();
 
   useEffect(() => {
     const inAuthGroup = segments[0] === '(auth)';
+    const inTerms = segments[0] === 'terms';
 
     if (!token && !inAuthGroup) {
       router.replace('/(auth)/login');
     } else if (token && inAuthGroup) {
-      router.replace('/(tabs)');
+      if (user && !user.terms_accepted) {
+        router.replace('/terms');
+      } else {
+        router.replace('/(tabs)');
+      }
+    } else if (token && user && !user.terms_accepted && !inTerms) {
+      router.replace('/terms');
     }
-  }, [token, segments]);
+  }, [token, user, segments]);
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <Stack>
         <Stack.Screen name="(auth)" options={{ headerShown: false }} />
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen name="terms" options={{ headerShown: false }} />
         <Stack.Screen name="inbox" options={{ headerShown: false, presentation: 'modal' }} />
       </Stack>
     </ThemeProvider>

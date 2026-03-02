@@ -8,6 +8,7 @@ from app.models.alert import Alert
 from app.models.message import Message
 from app.services.alert_service import AlertService
 from app.services.messaging_service import MessagingService
+from app.services.auth_service import AuthService
 from app.security import auth_middleware, admin_rate_limit, token_required, admin_required, moderate_rate_limit
 from datetime import datetime, timedelta
 import logging
@@ -327,6 +328,81 @@ def admin_broadcast():
         is_urgent=data.get('is_urgent', False),
     )
     return jsonify({'alert': alert.to_dict(), 'message': 'Broadcast sent'}), 201
+
+
+# --- Terms & Conditions ---
+
+@admin_bp.route('/terms', methods=['GET'])
+@admin_rate_limit
+@token_required
+@admin_required
+def admin_get_terms():
+    terms = AuthService.get_terms()
+    return jsonify({'terms': terms.to_dict()}), 200
+
+
+@admin_bp.route('/terms', methods=['PUT'])
+@admin_rate_limit
+@token_required
+@admin_required
+def admin_update_terms():
+    data = request.get_json()
+    if not data or not data.get('content'):
+        return jsonify({'error': 'Content required'}), 400
+    terms = AuthService.update_terms(data['content'], g.current_user.get('user_id'))
+    return jsonify({'terms': terms.to_dict(), 'message': 'Terms updated'}), 200
+
+
+@admin_bp.route('/terms/reset', methods=['POST'])
+@admin_rate_limit
+@token_required
+@admin_required
+def admin_reset_terms():
+    AuthService.reset_all_terms()
+    return jsonify({'message': 'All users must re-accept terms'}), 200
+
+
+# --- Admin Invite ---
+
+@admin_bp.route('/invite', methods=['POST'])
+@admin_rate_limit
+@token_required
+@admin_required
+def admin_invite_user():
+    data = request.get_json()
+    if not data or not data.get('email'):
+        return jsonify({'error': 'Email required'}), 400
+    user, error = AuthService.invite_user(data['email'], g.current_user.get('user_id'))
+    if error:
+        return jsonify({'error': error}), 400
+    return jsonify({'user': user.to_dict(), 'message': 'Invite sent'}), 201
+
+
+# --- Admin Users Management ---
+
+@admin_bp.route('/admin-users', methods=['GET'])
+@admin_rate_limit
+@token_required
+@admin_required
+def list_admin_users():
+    admins = AuthService.get_admin_users()
+    return jsonify({'users': [u.to_dict() for u in admins]}), 200
+
+
+# --- Admin Permissions ---
+
+@admin_bp.route('/users/<int:user_id>/permissions', methods=['PUT'])
+@admin_rate_limit
+@token_required
+@admin_required
+def update_user_permissions(user_id):
+    data = request.get_json()
+    if not data or 'permissions' not in data:
+        return jsonify({'error': 'Permissions object required'}), 400
+    user, error = AuthService.update_admin_permissions(user_id, data['permissions'])
+    if error:
+        return jsonify({'error': error}), 400
+    return jsonify({'user': user.to_dict()}), 200
 
 
 # --- Health & Test Results ---

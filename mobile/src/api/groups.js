@@ -34,3 +34,37 @@ export const getGroupTypes = async () => {
   const { data } = await client.get('/api/config/group-types');
   return data.types;
 };
+
+export const updateGroup = async (groupId, updates) => {
+  const { data } = await client.put(`/api/groups/${groupId}`, updates);
+  return data.group;
+};
+
+export const uploadGroupIcon = async (groupId, uri) => {
+  const formData = new FormData();
+  const ext = uri.split('.').pop()?.toLowerCase() || 'jpg';
+  formData.append('file', {
+    uri,
+    name: `icon.${ext}`,
+    type: ext === 'png' ? 'image/png' : 'image/jpeg',
+  });
+  const { data } = await client.post(`/api/uploads/group/${groupId}/icon`, formData, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  });
+  return data.group;
+};
+
+export const inviteMemberByEmail = async (groupId, email) => {
+  const { data } = await client.post(`/api/groups/${groupId}/invite-email`, { email });
+  return data;
+};
+
+export const updateMemberRole = async (groupId, userId, role) => {
+  const { data } = await client.put(`/api/groups/${groupId}/members/${userId}`, { role });
+  return data.member;
+};
+
+export const removeMember = async (groupId, userId) => {
+  const { data } = await client.delete(`/api/groups/${groupId}/members/${userId}`);
+  return data;
+};

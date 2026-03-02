@@ -115,6 +115,9 @@ def rate_limit(requests_per_minute=60, requests_per_hour=1000, per_user_multipli
     def decorator(f):
         @wraps(f)
         def decorated_function(*args, **kwargs):
+            from flask import current_app
+            if current_app.config.get('TESTING'):
+                return f(*args, **kwargs)
             client_id = get_client_identifier()
             
             # Apply multiplier for authenticated users

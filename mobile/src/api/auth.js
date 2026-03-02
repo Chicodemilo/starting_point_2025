@@ -29,3 +29,32 @@ export const setActiveGroup = async (groupId) => {
   const { data } = await client.put('/api/auth/active-group', { group_id: groupId });
   return data;
 };
+
+export const acceptTerms = async () => {
+  const { data } = await client.put('/api/auth/accept-terms');
+  return data;
+};
+
+export const getTerms = async () => {
+  const { data } = await client.get('/api/auth/terms');
+  return data;
+};
+
+export const changeEmail = async (email) => {
+  const { data } = await client.put('/api/auth/change-email', { email });
+  return data;
+};
+
+export const uploadAvatar = async (uri) => {
+  const formData = new FormData();
+  const ext = uri.split('.').pop()?.toLowerCase() || 'jpg';
+  formData.append('file', {
+    uri,
+    name: `avatar.${ext}`,
+    type: ext === 'png' ? 'image/png' : 'image/jpeg',
+  });
+  const { data } = await client.post('/api/uploads/avatar', formData, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  });
+  return data;
+};

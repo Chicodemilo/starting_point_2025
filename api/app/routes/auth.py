@@ -112,3 +112,62 @@ def set_active_group():
     if error:
         return jsonify({'error': error}), 400
     return jsonify({'user': user.to_dict()}), 200
+
+
+@auth_bp.route('/accept-terms', methods=['PUT'])
+@token_required
+def accept_terms():
+    user, error = AuthService.accept_terms(g.current_user.get('user_id'))
+    if error:
+        return jsonify({'error': error}), 400
+    return jsonify({'user': user.to_dict()}), 200
+
+
+@auth_bp.route('/terms', methods=['GET'])
+def get_terms():
+    terms = AuthService.get_terms()
+    return jsonify({'terms': terms.to_dict()}), 200
+
+
+@auth_bp.route('/change-email', methods=['PUT'])
+@token_required
+@moderate_rate_limit
+def change_email():
+    data = request.get_json()
+    if not data or not data.get('email'):
+        return jsonify({'error': 'New email required'}), 400
+    user, error = AuthService.change_email(g.current_user.get('user_id'), data['email'])
+    if error:
+        return jsonify({'error': error}), 400
+    return jsonify({'user': user.to_dict(), 'message': 'Verification email sent to new address'}), 200
+
+
+@auth_bp.route('/verify-new-email', methods=['GET'])
+@moderate_rate_limit
+def verify_new_email():
+    token = request.args.get('token')
+    user, error = AuthService.verify_new_email(token)
+    if error:
+        return jsonify({'error': error}), 400
+    return jsonify({'message': 'Email updated successfully', 'user': user.to_dict()}), 200
+
+
+@auth_bp.route('/complete-invite', methods=['POST'])
+@moderate_rate_limit
+def complete_invite():
+    data = request.get_json()
+    if not data:
+        return jsonify({'error': 'Request body required'}), 400
+    token = data.get('token')
+    username = data.get('username')
+    password = data.get('password')
+    if not all([token, username, password]):
+        return jsonify({'error': 'Token, username, and password required'}), 400
+    if len(password) < 6:
+        return jsonify({'error': 'Password must be at least 6 characters'}), 400
+    user, error = AuthService.complete_invite(token, username, password)
+    if error:
+        return jsonify({'error': error}), 400
+    from app.security import auth_middleware as am
+    jwt_token = am.generate_token(user.to_dict())
+    return jsonify({'token': jwt_token, 'user': user.to_dict()}), 200

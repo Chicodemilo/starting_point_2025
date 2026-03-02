@@ -14,10 +14,11 @@ class Group(db.Model):
     is_private = db.Column(db.Boolean, default=True, nullable=False)
     owner_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='CASCADE'), nullable=False)
     invite_code = db.Column(db.String(20), unique=True)
+    icon = db.Column(db.String(255), nullable=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
-    owner = db.relationship('User', backref='owned_groups')
+    owner = db.relationship('User', foreign_keys=[owner_id], backref='owned_groups')
     members = db.relationship('GroupMember', backref='group', cascade='all, delete-orphan')
 
     def __repr__(self):
@@ -39,6 +40,7 @@ class Group(db.Model):
             'is_private': self.is_private,
             'owner_id': self.owner_id,
             'invite_code': self.invite_code,
+            'icon': self.icon,
             'created_at': self.created_at.isoformat() if self.created_at else None,
             'updated_at': self.updated_at.isoformat() if self.updated_at else None
         }

@@ -8,10 +8,7 @@ function AdminMessages() {
 
   const fetchConversations = async () => {
     setLoading(true);
-    try {
-      const data = await getAdminConversations();
-      setConversations(data.conversations || []);
-    } catch { /* ignore */ }
+    try { const data = await getAdminConversations(); setConversations(data.conversations || []); } catch {}
     setLoading(false);
   };
 
@@ -27,42 +24,34 @@ function AdminMessages() {
 
   return (
     <div>
-      <h1>Messages</h1>
+      <h1 style={t.h1}><span style={t.prompt}>$</span> messages</h1>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', marginBottom: '24px' }}>
-        <div style={miniStat}><strong>{conversations.length}</strong><span>Conversations</span></div>
-        <div style={miniStat}><strong>{totalMessages}</strong><span>Total Messages</span></div>
+      <div style={t.statsRow}>
+        <div style={t.stat}><span style={t.statVal}>{conversations.length}</span> conversations</div>
+        <div style={t.stat}><span style={t.statVal}>{totalMessages}</span> messages</div>
       </div>
 
-      <div style={{ backgroundColor: '#f8f9fa', padding: '20px', borderRadius: '8px', marginBottom: '24px' }}>
-        <h3 style={{ marginTop: 0 }}>System Broadcast</h3>
+      <div style={t.section}>
+        <div style={{ color: '#9ca3af', fontSize: '13px', marginBottom: '8px' }}>broadcast:</div>
         <form onSubmit={handleBroadcast}>
-          <input placeholder="Title" value={broadcastForm.title} onChange={e => setBroadcastForm({...broadcastForm, title: e.target.value})} required style={inputStyle} />
-          <textarea placeholder="Content" value={broadcastForm.content} onChange={e => setBroadcastForm({...broadcastForm, content: e.target.value})} style={{ ...inputStyle, height: '60px' }} />
-          <button type="submit" style={btnStyle}>Send Broadcast</button>
+          <input placeholder="title" value={broadcastForm.title} onChange={e => setBroadcastForm({...broadcastForm, title: e.target.value})} required style={t.input} />
+          <textarea placeholder="content" value={broadcastForm.content} onChange={e => setBroadcastForm({...broadcastForm, content: e.target.value})} style={{ ...t.input, height: '50px' }} />
+          <button type="submit" style={t.submitBtn}>> broadcast</button>
         </form>
       </div>
 
-      {loading && <p>Loading...</p>}
+      {loading && <p style={t.muted}>loading...</p>}
 
-      <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-        <thead>
-          <tr style={{ borderBottom: '2px solid #dee2e6', textAlign: 'left' }}>
-            <th style={thStyle}>ID</th>
-            <th style={thStyle}>Type</th>
-            <th style={thStyle}>Name</th>
-            <th style={thStyle}>Members</th>
-            <th style={thStyle}>Messages</th>
-          </tr>
-        </thead>
+      <table style={t.table}>
+        <thead><tr>{['id', 'type', 'name', 'members', 'messages'].map(h => <th key={h} style={t.th}>{h}</th>)}</tr></thead>
         <tbody>
           {conversations.map(c => (
-            <tr key={c.id} style={{ borderBottom: '1px solid #eee' }}>
-              <td style={tdStyle}>{c.id}</td>
-              <td style={tdStyle}>{c.type}</td>
-              <td style={tdStyle}>{c.name || 'Direct Message'}</td>
-              <td style={tdStyle}>{c.member_count}</td>
-              <td style={tdStyle}>{c.message_count}</td>
+            <tr key={c.id} style={t.tr}>
+              <td style={t.td}>{c.id}</td>
+              <td style={t.td}>{c.type}</td>
+              <td style={t.td}>{c.name || 'dm'}</td>
+              <td style={t.td}>{c.member_count}</td>
+              <td style={t.td}>{c.message_count}</td>
             </tr>
           ))}
         </tbody>
@@ -71,10 +60,20 @@ function AdminMessages() {
   );
 }
 
-const miniStat = { padding: '16px', backgroundColor: '#fff', borderRadius: '8px', border: '1px solid #dee2e6', textAlign: 'center', display: 'flex', flexDirection: 'column', gap: '4px' };
-const inputStyle = { width: '100%', padding: '8px', border: '1px solid #ddd', borderRadius: '4px', marginBottom: '8px', fontSize: '14px', boxSizing: 'border-box' };
-const btnStyle = { padding: '10px 20px', backgroundColor: '#9b59b6', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' };
-const thStyle = { padding: '10px 8px', color: '#7f8c8d', fontSize: '12px', textTransform: 'uppercase' };
-const tdStyle = { padding: '10px 8px', fontSize: '14px' };
+const t = {
+  h1: { fontSize: '18px', color: '#4ade80', fontWeight: 'normal', margin: '0 0 20px', fontFamily: 'inherit' },
+  prompt: { color: '#4ade80' },
+  muted: { color: '#6b7280', fontSize: '13px' },
+  statsRow: { display: 'flex', gap: '16px', marginBottom: '20px' },
+  stat: { fontSize: '13px', color: '#6b7280' },
+  statVal: { color: '#4ade80', marginRight: '4px' },
+  section: { padding: '16px', backgroundColor: '#111111', border: '1px solid #1f1f1f', marginBottom: '20px' },
+  input: { width: '100%', padding: '8px 12px', backgroundColor: '#0a0a0a', border: '1px solid #2a2a2a', color: '#d1d5db', fontSize: '13px', fontFamily: 'inherit', boxSizing: 'border-box', marginBottom: '8px' },
+  submitBtn: { padding: '8px 16px', backgroundColor: '#1a1a1a', border: '1px solid #2a2a2a', color: '#a78bfa', fontSize: '13px', fontFamily: 'inherit', cursor: 'pointer' },
+  table: { width: '100%', borderCollapse: 'collapse' },
+  th: { padding: '8px', color: '#6b7280', fontSize: '11px', textAlign: 'left', borderBottom: '1px solid #1f1f1f', letterSpacing: '0.05em' },
+  tr: { borderBottom: '1px solid #1a1a1a' },
+  td: { padding: '8px', fontSize: '13px', color: '#d1d5db' },
+};
 
 export default AdminMessages;

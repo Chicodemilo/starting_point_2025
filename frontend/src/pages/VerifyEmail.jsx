@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { verifyEmail } from '../api/auth';
+import client from '../api/client';
 
 function VerifyEmail() {
   const [searchParams] = useSearchParams();
@@ -9,15 +10,21 @@ function VerifyEmail() {
 
   useEffect(() => {
     const token = searchParams.get('token');
+    const type = searchParams.get('type');
     if (!token) {
       setStatus('error');
       setMessage('No verification token provided.');
       return;
     }
-    verifyEmail(token)
+
+    const verifyFn = type === 'email-change'
+      ? () => client.get(`/api/auth/verify-new-email?token=${token}`).then(r => r.data)
+      : () => verifyEmail(token);
+
+    verifyFn()
       .then(() => {
         setStatus('success');
-        setMessage('Your email has been verified!');
+        setMessage(type === 'email-change' ? 'Your email has been updated!' : 'Your email has been verified!');
       })
       .catch((err) => {
         setStatus('error');

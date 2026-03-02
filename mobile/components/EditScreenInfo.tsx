@@ -1,3 +1,13 @@
+// ==============================================================================
+// File:      mobile/components/EditScreenInfo.tsx
+// Purpose:   Default Expo boilerplate component. Displays development
+//            instructions with a file path and a help link for
+//            reloading.
+// Callers:   (currently unused -- Expo boilerplate)
+// Callees:   ExternalLink, StyledText (MonoText), Themed, Colors
+// Modified:  2026-03-01
+// ==============================================================================
+
 import React from 'react';
 import { StyleSheet } from 'react-native';
 

@@ -1,3 +1,13 @@
+// ==============================================================================
+// File:      frontend/src/security/SecurityUtils.js
+// Purpose:   Frontend security utility classes. Provides encrypted
+//            localStorage wrapper (SecureStorage), security event monitor
+//            (SecurityMonitor), CSP nonce helper, secure random generator,
+//            and security headers checker.
+// Callers:   security/index.js
+// Callees:   (none — uses browser APIs: localStorage, crypto, fetch)
+// Modified:  2026-03-01
+// ==============================================================================
 /**
  * Security Utilities - Frontend Security Helper Functions
  * 

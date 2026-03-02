@@ -1,3 +1,12 @@
+# ==============================================================================
+# File:      api/app/security/examples.py
+# Purpose:   Reference examples demonstrating how to use all security
+#            middleware components (rate limiting, auth, headers, CSP,
+#            input validation). Not imported by the application itself.
+# Callers:   (none -- documentation/reference only)
+# Callees:   security/__init__.py, Flask
+# Modified:  2026-03-01
+# ==============================================================================
 """
 Security Middleware Usage Examples for Flask API
 

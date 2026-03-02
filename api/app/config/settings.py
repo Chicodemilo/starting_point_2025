@@ -1,3 +1,12 @@
+# ==============================================================================
+# File:      api/app/config/settings.py
+# Purpose:   Central application configuration loaded from environment
+#            variables. Covers database, JWT, admin seed credentials, SMTP,
+#            CORS origins, and security header defaults.
+# Callers:   app/__init__.py, config/__init__.py
+# Callees:   os (stdlib)
+# Modified:  2026-03-01
+# ==============================================================================
 import os
 
 

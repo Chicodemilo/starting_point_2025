@@ -1,3 +1,13 @@
+// ==============================================================================
+// File:      frontend/src/security/examples.jsx
+// Purpose:   Comprehensive usage examples for the frontend security package.
+//            Demonstrates login forms, registration, protected routes, admin
+//            panels, input validation, secure storage, session timeouts, and
+//            security monitoring in a sample React application.
+// Callers:   (none — reference/demo file)
+// Callees:   React, react-router-dom, security/index.js
+// Modified:  2026-03-01
+// ==============================================================================
 /**
  * Frontend Security Usage Examples
  * 

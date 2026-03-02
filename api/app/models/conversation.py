@@ -1,3 +1,12 @@
+# ==============================================================================
+# File:      api/app/models/conversation.py
+# Purpose:   Conversation model. Represents a group or direct-message
+#            conversation thread. Has relationships to ConversationMember
+#            and Message.
+# Callers:   messaging_service.py, models/__init__.py
+# Callees:   SQLAlchemy (db), datetime
+# Modified:  2026-03-01
+# ==============================================================================
 from app import db
 from datetime import datetime
 

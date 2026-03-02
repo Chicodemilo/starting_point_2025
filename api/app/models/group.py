@@ -1,3 +1,12 @@
+# ==============================================================================
+# File:      api/app/models/group.py
+# Purpose:   Group model. Represents a user-created group with name, type,
+#            privacy setting, owner, and invite code generation.
+# Callers:   group_service.py, routes/admin.py, routes/groups.py,
+#            routes/uploads.py, models/__init__.py
+# Callees:   SQLAlchemy (db), datetime, secrets, string
+# Modified:  2026-03-01
+# ==============================================================================
 from app import db
 from datetime import datetime
 import secrets

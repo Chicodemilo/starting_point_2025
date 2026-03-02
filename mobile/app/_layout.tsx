@@ -1,3 +1,16 @@
+// ==============================================================================
+// File:      mobile/app/_layout.tsx
+// Purpose:   Root layout for Expo Router. Handles auth guard, terms
+//            gating, font loading, and splash screen display. Redirects
+//            unauthenticated users to login and unaccepted-terms users
+//            to the terms screen.
+// Callers:   Expo Router (root entry point)
+// Callees:   expo-router, @react-navigation/native, expo-font,
+//            expo-splash-screen, react-native-reanimated,
+//            useColorScheme, authStore, SplashScreen
+// Modified:  2026-03-01
+// ==============================================================================
+
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import { Stack, useRouter, useSegments } from 'expo-router';

@@ -1,3 +1,12 @@
+// ==============================================================================
+// File:      frontend/src/pages/admin/AdminMessages.jsx
+// Purpose:   Admin messaging overview page. Shows conversation and message
+//            counts, provides a broadcast form for system-wide messages,
+//            and lists all conversations with member and message stats.
+// Callers:   AdminLayout.jsx
+// Callees:   React, api/conversations.js
+// Modified:  2026-03-01
+// ==============================================================================
 import React, { useEffect, useState } from 'react';
 import { getAdminConversations, adminBroadcast } from '../../api/conversations';
 

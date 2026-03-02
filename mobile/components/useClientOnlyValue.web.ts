@@ -1,3 +1,13 @@
+// ==============================================================================
+// File:      mobile/components/useClientOnlyValue.web.ts
+// Purpose:   Web implementation of useClientOnlyValue. Returns the
+//            server value during SSR and switches to the client value
+//            after hydration via useEffect.
+// Callers:   (currently unused -- available as utility)
+// Callees:   React
+// Modified:  2026-03-01
+// ==============================================================================
+
 import React from 'react';
 
 // `useEffect` is not invoked during server rendering, meaning

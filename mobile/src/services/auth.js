@@ -1,3 +1,13 @@
+// ==============================================================================
+// File:      mobile/src/services/auth.js
+// Purpose:   Token and session management helpers for React Native.
+//            Wraps expo-secure-store to get, set, and remove the JWT
+//            token and stored user object.
+// Callers:   (currently unused -- available as utility)
+// Callees:   expo-secure-store
+// Modified:  2026-03-01
+// ==============================================================================
+
 // Token and session management for React Native (uses expo-secure-store)
 import * as SecureStore from 'expo-secure-store';
 

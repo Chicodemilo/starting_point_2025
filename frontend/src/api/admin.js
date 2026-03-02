@@ -1,3 +1,13 @@
+// ==============================================================================
+// File:      frontend/src/api/admin.js
+// Purpose:   Admin panel API functions. Provides admin login, dashboard
+//            stats, user/group management, health checks, test results,
+//            terms editing, invite sending, and permission management.
+// Callers:   adminStore.js, AdminUsers.jsx, AdminGroups.jsx,
+//            AdminHealth.jsx, AdminTerms.jsx
+// Callees:   api/client.js
+// Modified:  2026-03-01
+// ==============================================================================
 import client from './client';
 
 export const adminLogin = async (email, password) => {

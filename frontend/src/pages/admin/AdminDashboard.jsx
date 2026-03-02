@@ -1,3 +1,12 @@
+// ==============================================================================
+// File:      frontend/src/pages/admin/AdminDashboard.jsx
+// Purpose:   Admin dashboard overview page. Displays stat cards for users,
+//            groups, items, alerts, messages, and recent signups, with
+//            quick-links to each admin section.
+// Callers:   AdminLayout.jsx
+// Callees:   React, adminStore.js
+// Modified:  2026-03-01
+// ==============================================================================
 import React, { useEffect } from 'react';
 import useAdminStore from '../../store/adminStore';
 

@@ -1,3 +1,12 @@
+# ==============================================================================
+# File:      api/app/routes/conversations.py
+# Purpose:   Conversations route blueprint. Provides endpoints for listing
+#            conversations, creating direct messages, and sending/fetching
+#            messages within a conversation.
+# Callers:   routes/__init__.py
+# Callees:   services/messaging_service.py, security/__init__.py, Flask
+# Modified:  2026-03-01
+# ==============================================================================
 from flask import Blueprint, jsonify, request, g
 from app.services.messaging_service import MessagingService
 from app.security import moderate_rate_limit, token_required

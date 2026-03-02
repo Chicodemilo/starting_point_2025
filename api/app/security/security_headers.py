@@ -1,3 +1,13 @@
+# ==============================================================================
+# File:      api/app/security/security_headers.py
+# Purpose:   Security headers middleware. Adds CSP, HSTS, X-Frame-Options,
+#            and other protective headers to every response. Also provides
+#            utility functions for URL safety, password hashing, filename
+#            sanitization, and HTML escaping.
+# Callers:   security/__init__.py, app/__init__.py
+# Callees:   Flask, secrets, hashlib, html, re, os
+# Modified:  2026-03-01
+# ==============================================================================
 """
 Security Headers Middleware for Flask API
 

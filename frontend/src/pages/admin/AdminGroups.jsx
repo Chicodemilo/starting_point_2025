@@ -1,3 +1,12 @@
+// ==============================================================================
+// File:      frontend/src/pages/admin/AdminGroups.jsx
+// Purpose:   Admin group management page. Lists all groups with search
+//            and type filter, displays group metadata, and provides
+//            group deletion functionality.
+// Callers:   AdminLayout.jsx
+// Callees:   React, adminStore.js, api/admin.js
+// Modified:  2026-03-01
+// ==============================================================================
 import React, { useEffect, useState } from 'react';
 import useAdminStore from '../../store/adminStore';
 import { deleteAdminGroup } from '../../api/admin';

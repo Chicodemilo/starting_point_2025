@@ -1,3 +1,16 @@
+# ==============================================================================
+# File:      api/app/security/__init__.py
+# Purpose:   Package init for security middleware. Re-exports rate limiting,
+#            JWT auth, and security header utilities for convenient
+#            importing across the application.
+# Callers:   app/__init__.py, routes/admin.py, routes/alerts.py,
+#            routes/auth.py, routes/config.py, routes/conversations.py,
+#            routes/groups.py, routes/items.py, routes/uploads.py,
+#            security/examples.py
+# Callees:   security/rate_limiter.py, security/auth_middleware.py,
+#            security/security_headers.py
+# Modified:  2026-03-01
+# ==============================================================================
 """
 Security Middleware Package for Flask API
 

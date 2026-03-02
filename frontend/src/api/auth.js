@@ -1,3 +1,13 @@
+// ==============================================================================
+// File:      frontend/src/api/auth.js
+// Purpose:   Authentication and user account API functions. Provides login,
+//            register, email verification, profile retrieval, avatar upload,
+//            terms acceptance, and invite completion endpoints.
+// Callers:   authStore.js, CheckEmail.jsx, VerifyEmail.jsx, Terms.jsx,
+//            Profile.jsx, GroupPicker.jsx, Invite.jsx
+// Callees:   api/client.js
+// Modified:  2026-03-01
+// ==============================================================================
 import client from './client';
 
 export const login = async (username, password) => {

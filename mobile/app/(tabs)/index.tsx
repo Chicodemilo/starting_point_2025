@@ -1,3 +1,14 @@
+// ==============================================================================
+// File:      mobile/app/(tabs)/index.tsx
+// Purpose:   Home tab screen. Displays a welcome greeting, active
+//            group status, summary stats for groups and items, and a
+//            preview list of the user's groups.
+// Callers:   Expo Router (screen), (tabs)/_layout.tsx
+// Callees:   expo-router, React Native, Themed, authStore,
+//            groupStore, itemStore
+// Modified:  2026-03-01
+// ==============================================================================
+
 import React, { useEffect } from 'react';
 import { StyleSheet, TouchableOpacity, FlatList } from 'react-native';
 import { useRouter } from 'expo-router';

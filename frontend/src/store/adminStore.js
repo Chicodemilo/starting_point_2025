@@ -1,3 +1,13 @@
+// ==============================================================================
+// File:      frontend/src/store/adminStore.js
+// Purpose:   Zustand store for admin panel state. Manages admin login,
+//            logout, session initialization, and fetching dashboard stats,
+//            users, and groups for the admin panel.
+// Callers:   AdminLayout.jsx, AdminLogin.jsx, AdminDashboard.jsx,
+//            AdminUsers.jsx, AdminGroups.jsx
+// Callees:   zustand, api/admin.js
+// Modified:  2026-03-01
+// ==============================================================================
 import { create } from 'zustand';
 import { adminLogin, getStats, getUsers, getAdminGroups } from '../api/admin';
 

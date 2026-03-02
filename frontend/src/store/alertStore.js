@@ -1,3 +1,11 @@
+// ==============================================================================
+// File:      frontend/src/store/alertStore.js
+// Purpose:   Zustand store for alert state. Manages fetching alerts, tracking
+//            unread counts, marking alerts as read, and deleting alerts.
+// Callers:   Dashboard.jsx, Inbox.jsx
+// Callees:   zustand, api/alerts.js
+// Modified:  2026-03-01
+// ==============================================================================
 import { create } from 'zustand';
 import { getAlerts, getUnreadCount, markAlertRead, deleteAlert } from '../api/alerts';
 

@@ -1,3 +1,12 @@
+# ==============================================================================
+# File:      api/app/routes/logs.py
+# Purpose:   Logging route blueprint. Receives frontend error and info
+#            messages via POST and writes them to server-side log files.
+#            Includes a health check for the logging subsystem.
+# Callers:   routes/__init__.py
+# Callees:   Flask, os, datetime, threading
+# Modified:  2026-03-01
+# ==============================================================================
 """
 Logging Routes - Handle frontend error logging to files
 

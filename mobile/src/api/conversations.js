@@ -1,3 +1,13 @@
+// ==============================================================================
+// File:      mobile/src/api/conversations.js
+// Purpose:   Conversations API functions. Provides listing
+//            conversations, creating new conversations, fetching
+//            paginated messages, and sending messages.
+// Callers:   store/messagingStore.js
+// Callees:   api/client
+// Modified:  2026-03-01
+// ==============================================================================
+
 import client from './client';
 
 export const getConversations = async () => {

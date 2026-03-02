@@ -1,3 +1,13 @@
+// ==============================================================================
+// File:      mobile/src/api/alerts.js
+// Purpose:   Alerts API functions. Provides fetching paginated alerts,
+//            getting the unread count, marking alerts as read, and
+//            deleting alerts.
+// Callers:   store/alertStore.js
+// Callees:   api/client
+// Modified:  2026-03-01
+// ==============================================================================
+
 import client from './client';
 
 export const getAlerts = async ({ page = 1, perPage = 20 } = {}) => {

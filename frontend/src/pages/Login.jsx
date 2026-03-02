@@ -1,3 +1,12 @@
+// ==============================================================================
+// File:      frontend/src/pages/Login.jsx
+// Purpose:   Login page component. Presents a username/password form,
+//            authenticates via the auth store, and redirects to home or
+//            terms page on success.
+// Callers:   App.jsx (route: /login)
+// Callees:   React, react-router-dom, authStore.js
+// Modified:  2026-03-01
+// ==============================================================================
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useAuthStore from '../store/authStore';

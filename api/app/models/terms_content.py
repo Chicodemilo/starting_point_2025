@@ -1,3 +1,11 @@
+# ==============================================================================
+# File:      api/app/models/terms_content.py
+# Purpose:   TermsContent model. Stores the current Terms & Conditions
+#            text with versioning. Updated by admins via auth_service.
+# Callers:   auth_service.py, models/__init__.py
+# Callees:   SQLAlchemy (db), datetime
+# Modified:  2026-03-01
+# ==============================================================================
 from app import db
 from datetime import datetime
 

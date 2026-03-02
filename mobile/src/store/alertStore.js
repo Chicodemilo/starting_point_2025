@@ -1,3 +1,13 @@
+// ==============================================================================
+// File:      mobile/src/store/alertStore.js
+// Purpose:   Zustand store for alert state. Manages the alerts list
+//            and unread count. Provides fetch, mark-read, and remove
+//            actions.
+// Callers:   (tabs)/_layout.tsx, inbox/index.tsx, inbox/alerts.tsx
+// Callees:   zustand, api/alerts
+// Modified:  2026-03-01
+// ==============================================================================
+
 import { create } from 'zustand';
 import { getAlerts, getUnreadCount, markAlertRead, deleteAlert } from '../api/alerts';
 

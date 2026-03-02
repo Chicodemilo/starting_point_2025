@@ -1,3 +1,13 @@
+// ==============================================================================
+// File:      frontend/src/store/groupStore.js
+// Purpose:   Zustand store for group state. Manages fetching, creating,
+//            joining, deleting groups, and tracking the user's active
+//            group selection in localStorage.
+// Callers:   Groups.jsx, GroupDetail.jsx, GroupAdmin.jsx, Dashboard.jsx,
+//            GroupPicker.jsx
+// Callees:   zustand, api/groups.js
+// Modified:  2026-03-01
+// ==============================================================================
 import { create } from 'zustand';
 import { getGroups, getGroup, createGroup, joinGroup, deleteGroup } from '../api/groups';
 

@@ -1,3 +1,13 @@
+# ==============================================================================
+# File:      api/app/utils/email.py
+# Purpose:   Email sending utilities. Provides functions for verification,
+#            email change confirmation, group invites, and admin user
+#            invites. Falls back to console logging when SMTP is not
+#            configured.
+# Callers:   auth_service.py, group_service.py
+# Callees:   smtplib, os, logging, email.mime
+# Modified:  2026-03-01
+# ==============================================================================
 import smtplib
 import os
 import logging

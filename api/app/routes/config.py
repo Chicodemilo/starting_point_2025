@@ -1,3 +1,11 @@
+# ==============================================================================
+# File:      api/app/routes/config.py
+# Purpose:   Config route blueprint. Exposes read-only application
+#            configuration data to the frontend, such as allowed group types.
+# Callers:   routes/__init__.py
+# Callees:   config/group_types.py, security/__init__.py, Flask
+# Modified:  2026-03-01
+# ==============================================================================
 from flask import Blueprint, jsonify
 from app.config.group_types import GROUP_TYPES
 from app.security import lenient_rate_limit

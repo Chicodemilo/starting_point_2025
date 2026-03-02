@@ -1,3 +1,12 @@
+// ==============================================================================
+// File:      frontend/src/api/conversations.js
+// Purpose:   Messaging and conversation API functions. Provides user-facing
+//            conversation/message CRUD and admin endpoints for viewing
+//            conversations, deleting messages, and broadcasting.
+// Callers:   messagingStore.js, AdminMessages.jsx
+// Callees:   api/client.js
+// Modified:  2026-03-01
+// ==============================================================================
 import client from './client';
 
 export const getConversations = async () => {

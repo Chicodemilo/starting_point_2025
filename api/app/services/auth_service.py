@@ -1,3 +1,15 @@
+# ==============================================================================
+# File:      api/app/services/auth_service.py
+# Purpose:   Authentication and user management service. Handles
+#            registration, login, email verification/change, admin seeding,
+#            terms acceptance, admin invites, and permission management.
+# Callers:   routes/auth.py, routes/admin.py, app/__init__.py,
+#            services/__init__.py
+# Callees:   models/user.py, models/group_member.py,
+#            models/terms_content.py, utils/email.py, SQLAlchemy (db),
+#            werkzeug.security, datetime, logging
+# Modified:  2026-03-01
+# ==============================================================================
 from app import db
 from app.models.user import User
 from app.models.group_member import GroupMember

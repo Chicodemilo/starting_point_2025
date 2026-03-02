@@ -1,3 +1,15 @@
+// ==============================================================================
+// File:      mobile/components/Themed.tsx
+// Purpose:   Theme-aware Text and View components. Applies light and
+//            dark mode colors from the Colors constant via the
+//            useColorScheme hook. Also exports useThemeColor.
+// Callers:   Most screens: +not-found, login, register, check-email,
+//            (tabs)/_layout, index, profile, groups/*, inbox/*,
+//            EditScreenInfo, StyledText
+// Callees:   React Native, useColorScheme, Colors
+// Modified:  2026-03-01
+// ==============================================================================
+
 /**
  * Learn more about Light and Dark modes:
  * https://docs.expo.io/guides/color-schemes/

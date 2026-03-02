@@ -1,3 +1,14 @@
+# ==============================================================================
+# File:      api/app/security/auth_middleware.py
+# Purpose:   JWT authentication and authorization middleware. Provides token
+#            generation/verification, decorators for protected endpoints
+#            (token_required, admin_required, role_required), API key
+#            validation, and permission utilities.
+# Callers:   security/__init__.py, app/__init__.py, routes/auth.py,
+#            routes/admin.py
+# Callees:   jwt (PyJWT), Flask, werkzeug.security, os, functools, datetime
+# Modified:  2026-03-01
+# ==============================================================================
 """
 Authentication and Authorization Middleware for Flask API
 

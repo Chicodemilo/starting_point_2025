@@ -1,3 +1,15 @@
+// ==============================================================================
+// File:      mobile/app/(tabs)/groups/create.tsx
+// Purpose:   Create group screen. Collects group name, description,
+//            type, and privacy setting, then creates the group via
+//            groupStore.
+// Callers:   Expo Router (screen), groups/_layout.tsx,
+//            groups/index.tsx (navigation)
+// Callees:   expo-router, React Native, Themed, groupStore,
+//            api/groups (getGroupTypes)
+// Modified:  2026-03-01
+// ==============================================================================
+
 import React, { useState, useEffect } from 'react';
 import {
   StyleSheet,

@@ -1,3 +1,12 @@
+# ==============================================================================
+# File:      api/app/models/user.py
+# Purpose:   User account model. Handles authentication fields, email
+#            verification, avatar, admin permissions, and group membership.
+# Callers:   auth_service.py, group_service.py, routes/auth.py,
+#            routes/admin.py, routes/uploads.py, models/__init__.py
+# Callees:   SQLAlchemy (db), secrets, datetime, json, werkzeug.security
+# Modified:  2026-03-01
+# ==============================================================================
 from app import db
 from datetime import datetime
 from werkzeug.security import check_password_hash, generate_password_hash

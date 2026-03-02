@@ -1,3 +1,12 @@
+// ==============================================================================
+// File:      mobile/app/+not-found.tsx
+// Purpose:   Catch-all 404 screen displayed when no route matches.
+//            Shows an error message and a link back to the home screen.
+// Callers:   Expo Router (unmatched routes)
+// Callees:   expo-router, React Native, Themed
+// Modified:  2026-03-01
+// ==============================================================================
+
 import { Link, Stack } from 'expo-router';
 import { StyleSheet } from 'react-native';
 

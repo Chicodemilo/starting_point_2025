@@ -1,3 +1,14 @@
+# ==============================================================================
+# File:      api/app/models/group_member.py
+# Purpose:   GroupMember model. Join table linking users to groups with a
+#            role (owner, admin, or member). Enforces unique group-user
+#            constraint.
+# Callers:   group_service.py, alert_service.py, messaging_service.py,
+#            routes/admin.py, routes/uploads.py, auth_service.py,
+#            models/__init__.py
+# Callees:   SQLAlchemy (db), datetime
+# Modified:  2026-03-01
+# ==============================================================================
 from app import db
 from datetime import datetime
 

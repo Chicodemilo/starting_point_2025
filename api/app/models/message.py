@@ -1,3 +1,11 @@
+# ==============================================================================
+# File:      api/app/models/message.py
+# Purpose:   Message model. Represents a single message within a
+#            conversation, linked to a sender and a conversation.
+# Callers:   messaging_service.py, routes/admin.py, models/__init__.py
+# Callees:   SQLAlchemy (db), datetime
+# Modified:  2026-03-01
+# ==============================================================================
 from app import db
 from datetime import datetime
 

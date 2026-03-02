@@ -1,3 +1,12 @@
+// ==============================================================================
+// File:      frontend/src/pages/Groups.jsx
+// Purpose:   Groups listing page. Displays the user's groups with type
+//            and visibility badges, and provides buttons to create a new
+//            group or join an existing one via invite code.
+// Callers:   App.jsx (route: /groups)
+// Callees:   React, react-router-dom, groupStore.js
+// Modified:  2026-03-01
+// ==============================================================================
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useGroupStore from '../store/groupStore';

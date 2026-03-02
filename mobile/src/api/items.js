@@ -1,3 +1,12 @@
+// ==============================================================================
+// File:      mobile/src/api/items.js
+// Purpose:   Items API functions. Provides CRUD operations for items
+//            with pagination and optional group/user filtering.
+// Callers:   store/itemStore.js
+// Callees:   api/client
+// Modified:  2026-03-01
+// ==============================================================================
+
 import client from './client';
 
 export const getItems = async ({ page = 1, perPage = 20, groupId, userId } = {}) => {

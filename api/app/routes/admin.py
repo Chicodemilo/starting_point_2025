@@ -1,3 +1,15 @@
+# ==============================================================================
+# File:      api/app/routes/admin.py
+# Purpose:   Admin route blueprint. Provides endpoints for user/group/alert
+#            management, messaging oversight, terms & conditions, admin
+#            invites, permissions, health checks, and test results.
+# Callers:   routes/__init__.py
+# Callees:   models/user.py, models/group.py, models/group_member.py,
+#            models/item.py, models/alert.py, models/message.py,
+#            services/alert_service.py, services/messaging_service.py,
+#            services/auth_service.py, security/__init__.py, Flask, db
+# Modified:  2026-03-01
+# ==============================================================================
 from flask import Blueprint, request, jsonify, g
 from app import db
 from app.models.user import User

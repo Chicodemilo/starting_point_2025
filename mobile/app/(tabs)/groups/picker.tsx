@@ -1,3 +1,15 @@
+// ==============================================================================
+// File:      mobile/app/(tabs)/groups/picker.tsx
+// Purpose:   Active group picker screen. Lists all groups the user
+//            belongs to and lets them select one as the active group
+//            for alerts and messaging.
+// Callers:   Expo Router (screen), groups/_layout.tsx,
+//            (tabs)/index.tsx (navigation)
+// Callees:   expo-router, React Native, Themed, authStore,
+//            groupStore, api/auth (setActiveGroup)
+// Modified:  2026-03-01
+// ==============================================================================
+
 import React, { useEffect } from 'react';
 import { StyleSheet, TouchableOpacity, FlatList, Alert } from 'react-native';
 import { useRouter } from 'expo-router';

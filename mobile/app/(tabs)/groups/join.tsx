@@ -1,3 +1,13 @@
+// ==============================================================================
+// File:      mobile/app/(tabs)/groups/join.tsx
+// Purpose:   Join group screen. Accepts an invite code and joins the
+//            group via groupStore, then navigates back on success.
+// Callers:   Expo Router (screen), groups/_layout.tsx,
+//            groups/index.tsx (navigation)
+// Callees:   expo-router, React Native, Themed, groupStore
+// Modified:  2026-03-01
+// ==============================================================================
+
 import React, { useState } from 'react';
 import {
   StyleSheet,

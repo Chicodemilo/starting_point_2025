@@ -1,3 +1,12 @@
+// ==============================================================================
+// File:      frontend/src/pages/admin/AdminAlerts.jsx
+// Purpose:   Admin alerts management page. Displays alert statistics, a
+//            form to send new system/targeted alerts, and a table listing
+//            all alerts with type, target, read status, and date.
+// Callers:   AdminLayout.jsx
+// Callees:   React, api/alerts.js
+// Modified:  2026-03-01
+// ==============================================================================
 import React, { useEffect, useState } from 'react';
 import { getAdminAlerts, createAdminAlert } from '../../api/alerts';
 

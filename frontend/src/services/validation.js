@@ -1,3 +1,12 @@
+// ==============================================================================
+// File:      frontend/src/services/validation.js
+// Purpose:   Form validation rules shared between web and mobile. Provides
+//            validators for email, password, username, and required fields,
+//            plus a composite registration validator.
+// Callers:   Register.jsx
+// Callees:   (none — pure validation functions)
+// Modified:  2026-03-01
+// ==============================================================================
 // Form validation rules — shared patterns between web and mobile
 
 export const validateEmail = (email) => {

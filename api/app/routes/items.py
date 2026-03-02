@@ -1,3 +1,12 @@
+# ==============================================================================
+# File:      api/app/routes/items.py
+# Purpose:   Items route blueprint. Provides CRUD endpoints for generic
+#            content items with pagination, group/user filtering, and
+#            owner/admin permission checks.
+# Callers:   routes/__init__.py
+# Callees:   services/item_service.py, security/__init__.py, Flask
+# Modified:  2026-03-01
+# ==============================================================================
 from flask import Blueprint, jsonify, request, g
 from app.services.item_service import ItemService
 from app.security import moderate_rate_limit, token_required

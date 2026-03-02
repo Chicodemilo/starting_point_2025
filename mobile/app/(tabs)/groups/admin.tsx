@@ -1,3 +1,17 @@
+// ==============================================================================
+// File:      mobile/app/(tabs)/groups/admin.tsx
+// Purpose:   Group admin screen. Allows the group owner to rename the
+//            group, change its icon, regenerate invite codes, invite
+//            members by email, and manage member roles or removal.
+// Callers:   Expo Router (screen), groups/_layout.tsx,
+//            groups/[id].tsx (navigation)
+// Callees:   expo-router, expo-image-picker, React Native, Themed,
+//            groupStore, authStore, api/groups (updateGroup,
+//            uploadGroupIcon, inviteMemberByEmail, updateMemberRole,
+//            removeMember, regenerateInvite), config
+// Modified:  2026-03-01
+// ==============================================================================
+
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, TouchableOpacity, TextInput, Alert, ScrollView, Image, ActivityIndicator } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';

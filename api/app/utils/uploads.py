@@ -1,3 +1,12 @@
+# ==============================================================================
+# File:      api/app/utils/uploads.py
+# Purpose:   File upload utilities. Handles avatar and group icon image
+#            processing (resize to multiple sizes), saving to disk, and
+#            deletion. Validates file type and size.
+# Callers:   routes/uploads.py
+# Callees:   os, uuid, logging, PIL (Pillow), werkzeug.utils
+# Modified:  2026-03-01
+# ==============================================================================
 import os
 import uuid
 import logging

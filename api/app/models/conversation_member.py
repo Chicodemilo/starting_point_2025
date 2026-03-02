@@ -1,3 +1,11 @@
+# ==============================================================================
+# File:      api/app/models/conversation_member.py
+# Purpose:   ConversationMember model. Join table linking users to
+#            conversations. Tracks when the member last read messages.
+# Callers:   messaging_service.py, models/__init__.py
+# Callees:   SQLAlchemy (db), datetime
+# Modified:  2026-03-01
+# ==============================================================================
 from app import db
 from datetime import datetime
 

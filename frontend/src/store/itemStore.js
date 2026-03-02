@@ -1,3 +1,11 @@
+// ==============================================================================
+// File:      frontend/src/store/itemStore.js
+// Purpose:   Zustand store for item state. Manages fetching, creating,
+//            updating, and deleting items with pagination support.
+// Callers:   Dashboard.jsx
+// Callees:   zustand, api/items.js
+// Modified:  2026-03-01
+// ==============================================================================
 import { create } from 'zustand';
 import { getItems, createItem, updateItem, deleteItem } from '../api/items';
 

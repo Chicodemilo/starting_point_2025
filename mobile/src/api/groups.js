@@ -1,3 +1,15 @@
+// ==============================================================================
+// File:      mobile/src/api/groups.js
+// Purpose:   Groups API functions. Provides CRUD for groups, join by
+//            invite code, invite regeneration, group type listing,
+//            icon upload, member invitation by email, role updates,
+//            and member removal.
+// Callers:   store/groupStore.js, groups/admin.tsx,
+//            groups/create.tsx
+// Callees:   api/client
+// Modified:  2026-03-01
+// ==============================================================================
+
 import client from './client';
 
 export const getGroups = async (publicOnly = false) => {

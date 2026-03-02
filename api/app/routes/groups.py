@@ -1,3 +1,12 @@
+# ==============================================================================
+# File:      api/app/routes/groups.py
+# Purpose:   Groups route blueprint. Handles group CRUD, membership
+#            management, invite codes, email invitations, role updates,
+#            and public group browsing.
+# Callers:   routes/__init__.py
+# Callees:   services/group_service.py, security/__init__.py, Flask
+# Modified:  2026-03-01
+# ==============================================================================
 from flask import Blueprint, jsonify, request, g
 from app.services.group_service import GroupService
 from app.security import moderate_rate_limit, token_required

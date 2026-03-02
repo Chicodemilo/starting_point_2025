@@ -1,3 +1,15 @@
+// ==============================================================================
+// File:      mobile/app/(auth)/check-email.tsx
+// Purpose:   Post-registration screen prompting the user to verify
+//            their email address. Provides a button to resend the
+//            verification email via the auth API.
+// Callers:   Expo Router (screen), (auth)/_layout.tsx,
+//            (auth)/register.tsx (redirect)
+// Callees:   expo-router, React Native, Themed,
+//            api/auth (resendVerification)
+// Modified:  2026-03-01
+// ==============================================================================
+
 import React, { useState } from 'react';
 import { StyleSheet, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { Link } from 'expo-router';

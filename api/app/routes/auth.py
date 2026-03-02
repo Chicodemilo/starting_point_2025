@@ -1,3 +1,12 @@
+# ==============================================================================
+# File:      api/app/routes/auth.py
+# Purpose:   Auth route blueprint. Handles user registration, login, token
+#            verification, profile, email verification/change, terms
+#            acceptance, active group selection, and invite completion.
+# Callers:   routes/__init__.py
+# Callees:   services/auth_service.py, security/__init__.py, Flask
+# Modified:  2026-03-01
+# ==============================================================================
 from flask import Blueprint, jsonify, request, g
 from app.services.auth_service import AuthService
 from app.security import auth_middleware, moderate_rate_limit, token_required

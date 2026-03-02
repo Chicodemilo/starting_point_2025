@@ -1,3 +1,12 @@
+// ==============================================================================
+// File:      frontend/src/pages/MessageThread.jsx
+// Purpose:   Conversation message thread view. Displays a scrollable list
+//            of messages with sender bubbles, auto-scrolls to the latest
+//            message, and provides a compose input to send new messages.
+// Callers:   App.jsx (route: /inbox/conversation/:id)
+// Callees:   React, react-router-dom, messagingStore.js, authStore.js
+// Modified:  2026-03-01
+// ==============================================================================
 import React, { useEffect, useState, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import useMessagingStore from '../store/messagingStore';

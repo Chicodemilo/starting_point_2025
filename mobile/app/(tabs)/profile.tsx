@@ -1,3 +1,14 @@
+// ==============================================================================
+// File:      mobile/app/(tabs)/profile.tsx
+// Purpose:   Profile tab screen. Shows user info (avatar, username,
+//            email, verification status). Supports avatar upload,
+//            email change, and logout.
+// Callers:   Expo Router (screen), (tabs)/_layout.tsx
+// Callees:   expo-image-picker, React Native, Themed, authStore,
+//            api/auth (changeEmail, uploadAvatar), config
+// Modified:  2026-03-01
+// ==============================================================================
+
 import React, { useState } from 'react';
 import { StyleSheet, TouchableOpacity, Alert, TextInput, Image, ActivityIndicator } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';

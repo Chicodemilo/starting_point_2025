@@ -1,3 +1,12 @@
+// ==============================================================================
+// File:      frontend/src/api/alerts.js
+// Purpose:   Alert API functions. Provides CRUD for user alerts, unread
+//            count retrieval, and admin alert management endpoints for
+//            creating and listing system-wide alerts.
+// Callers:   alertStore.js, AdminAlerts.jsx
+// Callees:   api/client.js
+// Modified:  2026-03-01
+// ==============================================================================
 import client from './client';
 
 export const getAlerts = async ({ page = 1, perPage = 20 } = {}) => {

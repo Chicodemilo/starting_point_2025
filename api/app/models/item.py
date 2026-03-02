@@ -1,3 +1,11 @@
+# ==============================================================================
+# File:      api/app/models/item.py
+# Purpose:   Item model. Generic content item belonging to a user and
+#            optionally scoped to a group. Supports title and description.
+# Callers:   item_service.py, routes/admin.py, models/__init__.py
+# Callees:   SQLAlchemy (db), datetime
+# Modified:  2026-03-01
+# ==============================================================================
 from app import db
 from datetime import datetime
 

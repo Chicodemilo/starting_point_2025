@@ -1,3 +1,13 @@
+// ==============================================================================
+// File:      frontend/src/pages/Dashboard.jsx
+// Purpose:   Main user dashboard. Displays summary stats for groups and
+//            items, active group status, unread alert and message counts,
+//            and a list of the user's groups.
+// Callers:   App.jsx (route: /dashboard)
+// Callees:   React, authStore.js, groupStore.js, itemStore.js,
+//            alertStore.js, messagingStore.js
+// Modified:  2026-03-01
+// ==============================================================================
 import React, { useEffect } from 'react';
 import useAuthStore from '../store/authStore';
 import useGroupStore from '../store/groupStore';

@@ -1,3 +1,13 @@
+// ==============================================================================
+// File:      frontend/src/pages/Register.jsx
+// Purpose:   Registration page component. Presents a signup form with
+//            client-side validation, creates the account via the auth
+//            store, and redirects to the check-email page on success.
+// Callers:   App.jsx (route: /register)
+// Callees:   React, react-router-dom, authStore.js,
+//            services/validation.js
+// Modified:  2026-03-01
+// ==============================================================================
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useAuthStore from '../store/authStore';

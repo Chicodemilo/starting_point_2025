@@ -1,3 +1,12 @@
+// ==============================================================================
+// File:      frontend/src/utils/localStorage.js
+// Purpose:   LocalStorage utility class with JSON serialization, admin
+//            session helpers, and storage inspection methods. Provides a
+//            safe wrapper around browser localStorage with error handling.
+// Callers:   security/AuthGuard.jsx
+// Callees:   (none — uses browser localStorage API directly)
+// Modified:  2026-03-01
+// ==============================================================================
 /**
  * LocalStorage utility class for managing browser localStorage
  * Provides simple methods for saving, getting, and deleting data

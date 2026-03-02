@@ -1,3 +1,12 @@
+// ==============================================================================
+// File:      frontend/src/pages/admin/AdminHealth.jsx
+// Purpose:   Admin health monitoring page. Displays API and database status,
+//            resource counts, auto-refreshing every 30 seconds, and test
+//            suite results with pass/fail counts and failed test names.
+// Callers:   AdminLayout.jsx
+// Callees:   React, api/admin.js
+// Modified:  2026-03-01
+// ==============================================================================
 import React, { useEffect, useState } from 'react';
 import { getAdminHealth, getAdminTestResults } from '../../api/admin';
 

@@ -1,3 +1,16 @@
+// ==============================================================================
+// File:      mobile/src/store/groupStore.js
+// Purpose:   Zustand store for group state. Manages groups list,
+//            current group detail, active group, and CRUD actions
+//            (fetch, create, join, delete) with SecureStore
+//            persistence for the active group selection.
+// Callers:   (tabs)/index.tsx, groups/index.tsx, groups/[id].tsx,
+//            groups/admin.tsx, groups/create.tsx, groups/join.tsx,
+//            groups/picker.tsx
+// Callees:   zustand, expo-secure-store, api/groups
+// Modified:  2026-03-01
+// ==============================================================================
+
 import { create } from 'zustand';
 import * as SecureStore from 'expo-secure-store';
 import { getGroups, getGroup, createGroup, joinGroup, deleteGroup } from '../api/groups';

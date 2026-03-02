@@ -1,3 +1,15 @@
+// ==============================================================================
+// File:      mobile/app/(tabs)/groups/[id].tsx
+// Purpose:   Group detail screen. Shows group icon, name, type,
+//            privacy, invite code, and member list. Provides a link
+//            to the admin screen for group owners.
+// Callers:   Expo Router (screen), groups/_layout.tsx,
+//            groups/index.tsx (navigation), (tabs)/index.tsx
+// Callees:   expo-router, React Native, Themed, groupStore,
+//            authStore, config
+// Modified:  2026-03-01
+// ==============================================================================
+
 import React, { useEffect } from 'react';
 import { StyleSheet, TouchableOpacity, FlatList, ActivityIndicator, Image } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';

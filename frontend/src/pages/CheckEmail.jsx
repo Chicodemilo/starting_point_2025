@@ -1,3 +1,12 @@
+// ==============================================================================
+// File:      frontend/src/pages/CheckEmail.jsx
+// Purpose:   Post-registration email verification prompt. Instructs the
+//            user to check their inbox and provides a button to resend
+//            the verification email.
+// Callers:   App.jsx (route: /check-email)
+// Callees:   React, authStore.js, api/auth.js
+// Modified:  2026-03-01
+// ==============================================================================
 import React, { useState } from 'react';
 import useAuthStore from '../store/authStore';
 import { resendVerification } from '../api/auth';

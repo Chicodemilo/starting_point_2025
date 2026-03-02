@@ -1,3 +1,12 @@
+// ==============================================================================
+// File:      frontend/src/pages/admin/AdminTerms.jsx
+// Purpose:   Admin terms and conditions editor. Provides a textarea to edit
+//            the terms content, save updates with version tracking, and
+//            reset all user acceptances to force re-acceptance.
+// Callers:   AdminLayout.jsx
+// Callees:   React, api/admin.js
+// Modified:  2026-03-01
+// ==============================================================================
 import React, { useEffect, useState } from 'react';
 import { getAdminTerms, updateAdminTerms, resetAllTerms } from '../../api/admin';
 

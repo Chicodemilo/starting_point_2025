@@ -1,3 +1,15 @@
+// ==============================================================================
+// File:      frontend/src/pages/admin/AdminLayout.jsx
+// Purpose:   Admin panel layout shell. Renders a terminal-themed sidebar
+//            with permission-filtered navigation, nested admin routes,
+//            and login gate. Contains all admin sub-page routing.
+// Callers:   App.jsx (route: /overview/*)
+// Callees:   React, react-router-dom, adminStore.js, AdminLogin.jsx,
+//            AdminDashboard.jsx, AdminUsers.jsx, AdminGroups.jsx,
+//            AdminAlerts.jsx, AdminMessages.jsx, AdminHealth.jsx,
+//            AdminTerms.jsx
+// Modified:  2026-03-01
+// ==============================================================================
 import React from 'react';
 import { Routes, Route, NavLink, useNavigate } from 'react-router-dom';
 import useAdminStore from '../../store/adminStore';

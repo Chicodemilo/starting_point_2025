@@ -1,3 +1,13 @@
+// ==============================================================================
+// File:      mobile/app/(tabs)/groups/index.tsx
+// Purpose:   Groups list screen. Fetches and displays all groups the
+//            user belongs to, with buttons to create or join a group.
+// Callers:   Expo Router (screen), groups/_layout.tsx,
+//            (tabs)/index.tsx (navigation)
+// Callees:   expo-router, React Native, Themed, groupStore
+// Modified:  2026-03-01
+// ==============================================================================
+
 import React, { useEffect } from 'react';
 import { StyleSheet, TouchableOpacity, FlatList, ActivityIndicator } from 'react-native';
 import { useRouter } from 'expo-router';

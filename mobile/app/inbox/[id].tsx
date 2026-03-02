@@ -1,3 +1,16 @@
+// ==============================================================================
+// File:      mobile/app/inbox/[id].tsx
+// Purpose:   Individual conversation screen. Displays a scrollable
+//            message thread with own/other message bubbles and a
+//            compose bar for sending new messages.
+// Callers:   Expo Router (screen), inbox/_layout.tsx,
+//            inbox/index.tsx (navigation),
+//            inbox/conversations.tsx (navigation)
+// Callees:   expo-router, React Native, Themed, messagingStore,
+//            authStore
+// Modified:  2026-03-01
+// ==============================================================================
+
 import React, { useEffect, useState, useRef } from 'react';
 import { StyleSheet, TextInput, TouchableOpacity, FlatList, KeyboardAvoidingView, Platform } from 'react-native';
 import { useLocalSearchParams } from 'expo-router';

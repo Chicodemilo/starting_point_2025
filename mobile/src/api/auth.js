@@ -1,3 +1,16 @@
+// ==============================================================================
+// File:      mobile/src/api/auth.js
+// Purpose:   Auth API functions. Provides login, register, token
+//            verification, profile retrieval, email verification
+//            resend, active group setting, terms acceptance, email
+//            change, and avatar upload endpoints.
+// Callers:   store/authStore.js, app/terms.tsx,
+//            (auth)/check-email.tsx, (tabs)/profile.tsx,
+//            groups/picker.tsx
+// Callees:   api/client
+// Modified:  2026-03-01
+// ==============================================================================
+
 import client from './client';
 
 export const login = async (username, password) => {

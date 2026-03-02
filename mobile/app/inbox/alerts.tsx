@@ -1,3 +1,13 @@
+// ==============================================================================
+// File:      mobile/app/inbox/alerts.tsx
+// Purpose:   Dedicated alerts screen. Lists all alerts with type
+//            badges, and provides mark-read and delete actions on
+//            each alert.
+// Callers:   Expo Router (screen), inbox/_layout.tsx
+// Callees:   React Native, Themed, alertStore
+// Modified:  2026-03-01
+// ==============================================================================
+
 import React, { useEffect } from 'react';
 import { StyleSheet, TouchableOpacity, FlatList } from 'react-native';
 import { Text, View } from '@/components/Themed';

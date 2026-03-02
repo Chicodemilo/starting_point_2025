@@ -1,3 +1,12 @@
+// ==============================================================================
+// File:      frontend/src/pages/Terms.jsx
+// Purpose:   Terms and conditions page. Fetches the current terms content,
+//            displays it for review, and allows authenticated users to
+//            accept the terms before continuing to use the app.
+// Callers:   App.jsx (route: /terms)
+// Callees:   React, react-router-dom, authStore.js, api/auth.js
+// Modified:  2026-03-01
+// ==============================================================================
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useAuthStore from '../store/authStore';

@@ -1,3 +1,12 @@
+# ==============================================================================
+# File:      api/app/security/rate_limiter.py
+# Purpose:   Rate limiting middleware using a sliding-window algorithm.
+#            Provides configurable per-endpoint decorators (strict,
+#            moderate, lenient, admin) and cleanup utilities.
+# Callers:   security/__init__.py, app/__init__.py
+# Callees:   Flask, time, json, functools, collections, threading, datetime
+# Modified:  2026-03-01
+# ==============================================================================
 """
 Rate Limiting Middleware for Flask API
 

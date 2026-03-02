@@ -1,3 +1,14 @@
+// ==============================================================================
+// File:      mobile/app/terms.tsx
+// Purpose:   Terms and conditions screen. Fetches terms content from
+//            the API and requires the user to accept before proceeding
+//            to the main app.
+// Callers:   Expo Router (screen), app/_layout.tsx (redirect)
+// Callees:   expo-router, React Native, api/auth (getTerms,
+//            acceptTerms), authStore
+// Modified:  2026-03-01
+// ==============================================================================
+
 import React, { useEffect, useState } from 'react';
 import { View, Text, ScrollView, TouchableOpacity, StyleSheet, ActivityIndicator } from 'react-native';
 import { useRouter } from 'expo-router';

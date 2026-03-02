@@ -1,3 +1,17 @@
+// ==============================================================================
+// File:      mobile/src/store/authStore.js
+// Purpose:   Zustand store for authentication state. Manages user,
+//            token, loading, and error. Provides initialize, login,
+//            register, refreshProfile, and logout actions backed by
+//            SecureStore persistence.
+// Callers:   app/_layout.tsx, app/terms.tsx, (auth)/login.tsx,
+//            (auth)/register.tsx, (tabs)/index.tsx, (tabs)/profile.tsx,
+//            groups/[id].tsx, groups/admin.tsx, groups/picker.tsx,
+//            inbox/[id].tsx
+// Callees:   zustand, expo-secure-store, api/auth
+// Modified:  2026-03-01
+// ==============================================================================
+
 import { create } from 'zustand';
 import * as SecureStore from 'expo-secure-store';
 import { login as apiLogin, register as apiRegister, getProfile } from '../api/auth';

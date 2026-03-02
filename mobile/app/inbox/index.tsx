@@ -1,3 +1,15 @@
+// ==============================================================================
+// File:      mobile/app/inbox/index.tsx
+// Purpose:   Unified inbox screen with a segmented control toggling
+//            between alerts and message conversations. Displays
+//            unread counts for each segment.
+// Callers:   Expo Router (screen), inbox/_layout.tsx,
+//            (tabs)/_layout.tsx (BellIcon navigation)
+// Callees:   expo-router, React Native, Themed, alertStore,
+//            messagingStore
+// Modified:  2026-03-01
+// ==============================================================================
+
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, TouchableOpacity, FlatList, ScrollView } from 'react-native';
 import { useRouter } from 'expo-router';

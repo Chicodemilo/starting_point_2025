@@ -1,3 +1,13 @@
+// ==============================================================================
+// File:      frontend/src/security/InputSanitizer.js
+// Purpose:   Frontend input validation and sanitization library. Provides
+//            HTML escaping, XSS protection, email/URL/password validation,
+//            form data sanitization, client-side rate limiting, a React
+//            validation hook, and secure token generation.
+// Callers:   security/index.js
+// Callees:   React (useState, useCallback)
+// Modified:  2026-03-01
+// ==============================================================================
 /**
  * Input Sanitizer - Frontend Input Validation and Sanitization
  * 

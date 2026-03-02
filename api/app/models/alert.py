@@ -1,3 +1,12 @@
+# ==============================================================================
+# File:      api/app/models/alert.py
+# Purpose:   Alert model. Represents notifications sent to individual users,
+#            groups, or system-wide. Tracks read status and expiration.
+# Callers:   alert_service.py, routes/admin.py, routes/alerts.py,
+#            models/__init__.py
+# Callees:   SQLAlchemy (db), datetime
+# Modified:  2026-03-01
+# ==============================================================================
 from app import db
 from datetime import datetime
 

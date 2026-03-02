@@ -1,3 +1,13 @@
+// ==============================================================================
+// File:      mobile/components/ExternalLink.tsx
+// Purpose:   Link component for external URLs. On native platforms,
+//            opens links in an in-app browser via expo-web-browser
+//            instead of the system browser.
+// Callers:   EditScreenInfo.tsx
+// Callees:   expo-router, expo-web-browser, React Native
+// Modified:  2026-03-01
+// ==============================================================================
+
 import { Link } from 'expo-router';
 import * as WebBrowser from 'expo-web-browser';
 import React from 'react';

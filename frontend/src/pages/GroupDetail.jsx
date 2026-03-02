@@ -1,3 +1,12 @@
+// ==============================================================================
+// File:      frontend/src/pages/GroupDetail.jsx
+// Purpose:   Group detail page. Shows group name, icon, type, visibility,
+//            invite code, and member list. Provides a manage link for
+//            the group owner.
+// Callers:   App.jsx (route: /groups/:id)
+// Callees:   React, react-router-dom, groupStore.js, authStore.js
+// Modified:  2026-03-01
+// ==============================================================================
 import React, { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import useGroupStore from '../store/groupStore';

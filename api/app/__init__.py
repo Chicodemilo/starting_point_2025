@@ -1,3 +1,14 @@
+# ==============================================================================
+# File:      api/app/__init__.py
+# Purpose:   Flask application factory. Initializes extensions (SQLAlchemy,
+#            Migrate, CORS), registers security middleware, blueprints,
+#            seeds admin user, and provides health/status endpoints.
+# Callers:   Direct entry point (WSGI/Gunicorn), tests
+# Callees:   Flask, flask_sqlalchemy, flask_migrate, flask_cors,
+#            config/settings.py, security/__init__.py, models/__init__.py,
+#            routes/__init__.py, services/auth_service.py
+# Modified:  2026-03-01
+# ==============================================================================
 from flask import Flask, request, g
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate

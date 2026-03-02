@@ -1,3 +1,13 @@
+// ==============================================================================
+// File:      mobile/src/store/itemStore.js
+// Purpose:   Zustand store for item state. Manages a paginated items
+//            list and provides fetch, create, update, and delete
+//            actions.
+// Callers:   (tabs)/index.tsx
+// Callees:   zustand, api/items
+// Modified:  2026-03-01
+// ==============================================================================
+
 import { create } from 'zustand';
 import { getItems, createItem, updateItem, deleteItem } from '../api/items';
 

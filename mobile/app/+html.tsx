@@ -1,3 +1,13 @@
+// ==============================================================================
+// File:      mobile/app/+html.tsx
+// Purpose:   Web-only root HTML template for static rendering. Sets up
+//            the <html> and <head> elements, disables body scrolling,
+//            and applies dark-mode-safe background colors.
+// Callers:   Expo Router (web static rendering)
+// Callees:   expo-router/html (ScrollViewStyleReset)
+// Modified:  2026-03-01
+// ==============================================================================
+
 import { ScrollViewStyleReset } from 'expo-router/html';
 
 // This file is web-only and used to configure the root HTML for every

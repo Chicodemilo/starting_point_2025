@@ -1,3 +1,13 @@
+// ==============================================================================
+// File:      mobile/src/components/SplashScreen.tsx
+// Purpose:   Custom splash screen component shown while the app is
+//            loading fonts and initializing auth. Displays the app's
+//            first-letter logo, name, and a loading spinner.
+// Callers:   app/_layout.tsx
+// Callees:   React Native, expo-constants
+// Modified:  2026-03-01
+// ==============================================================================
+
 import React from 'react';
 import { StyleSheet, View, Text, ActivityIndicator } from 'react-native';
 import Constants from 'expo-constants';

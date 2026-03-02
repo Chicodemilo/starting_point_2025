@@ -1,3 +1,12 @@
+// ==============================================================================
+// File:      frontend/src/pages/admin/AdminLogin.jsx
+// Purpose:   Admin login form component with terminal-themed styling.
+//            Authenticates admin credentials via the admin store and
+//            displays error feedback on failure.
+// Callers:   AdminLayout.jsx
+// Callees:   React, adminStore.js
+// Modified:  2026-03-01
+// ==============================================================================
 import React, { useState } from 'react';
 import useAdminStore from '../../store/adminStore';
 

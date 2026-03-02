@@ -1,3 +1,15 @@
+// ==============================================================================
+// File:      frontend/src/store/authStore.js
+// Purpose:   Zustand store for authentication state. Manages user login,
+//            registration, logout, profile refresh, and JWT token
+//            persistence in localStorage.
+// Callers:   Home.jsx, Login.jsx, Register.jsx, CheckEmail.jsx,
+//            Profile.jsx, Terms.jsx, GroupPicker.jsx, Invite.jsx,
+//            Dashboard.jsx, GroupDetail.jsx, GroupAdmin.jsx,
+//            MessageThread.jsx
+// Callees:   zustand, api/auth.js
+// Modified:  2026-03-01
+// ==============================================================================
 import { create } from 'zustand';
 import { login as apiLogin, register as apiRegister, getProfile } from '../api/auth';
 

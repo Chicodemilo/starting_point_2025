@@ -1,3 +1,13 @@
+// ==============================================================================
+// File:      frontend/src/security/index.js
+// Purpose:   Barrel export for the frontend security package. Re-exports
+//            authentication guards, input sanitizers, security utilities,
+//            configuration constants, validation schemas, and helpers.
+// Callers:   security/examples.jsx
+// Callees:   security/AuthGuard.jsx, security/InputSanitizer.js,
+//            security/SecurityUtils.js
+// Modified:  2026-03-01
+// ==============================================================================
 /**
  * Security Package for Frontend
  * 

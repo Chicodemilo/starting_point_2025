@@ -1,3 +1,12 @@
+// ==============================================================================
+// File:      frontend/src/store/messagingStore.js
+// Purpose:   Zustand store for messaging state. Manages conversations,
+//            message fetching, sending messages, and starting new
+//            conversations between users.
+// Callers:   Dashboard.jsx, Inbox.jsx, MessageThread.jsx
+// Callees:   zustand, api/conversations.js
+// Modified:  2026-03-01
+// ==============================================================================
 import { create } from 'zustand';
 import { getConversations, getMessages, sendMessage, createConversation } from '../api/conversations';
 

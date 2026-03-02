@@ -1,3 +1,14 @@
+// ==============================================================================
+// File:      frontend/src/security/AuthGuard.jsx
+// Purpose:   Frontend authentication and authorization guard. Provides
+//            route protection components (ProtectedRoute, AdminRoute),
+//            an auth context provider, session timeout handling, and
+//            hooks for checking auth state and permissions.
+// Callers:   security/index.js
+// Callees:   React, react-router-dom, utils/localStorage.js,
+//            db/adminConnector, db/mainConnector
+// Modified:  2026-03-01
+// ==============================================================================
 /**
  * AuthGuard - Frontend Authentication and Authorization Guard
  * 

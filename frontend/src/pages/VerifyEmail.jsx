@@ -1,3 +1,12 @@
+// ==============================================================================
+// File:      frontend/src/pages/VerifyEmail.jsx
+// Purpose:   Email verification handler. Reads the verification token from
+//            the URL, calls the appropriate verify endpoint (new account or
+//            email change), and displays success or error status.
+// Callers:   App.jsx (route: /verify-email)
+// Callees:   React, react-router-dom, api/auth.js, api/client.js
+// Modified:  2026-03-01
+// ==============================================================================
 import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { verifyEmail } from '../api/auth';

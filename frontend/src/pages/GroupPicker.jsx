@@ -1,3 +1,13 @@
+// ==============================================================================
+// File:      frontend/src/pages/GroupPicker.jsx
+// Purpose:   Active group selection page. Lets users pick which group to
+//            use as their active context for alerts and messaging, or
+//            clear the current active group.
+// Callers:   App.jsx (route: /group-picker)
+// Callees:   React, react-router-dom, authStore.js, groupStore.js,
+//            api/auth.js
+// Modified:  2026-03-01
+// ==============================================================================
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useAuthStore from '../store/authStore';

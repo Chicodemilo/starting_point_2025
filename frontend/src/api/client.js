@@ -1,3 +1,14 @@
+// ==============================================================================
+// File:      frontend/src/api/client.js
+// Purpose:   Axios HTTP client instance with JWT interceptor. Attaches
+//            Bearer token from localStorage to all outgoing requests.
+//            Handles 401 responses globally by clearing session and
+//            redirecting to login.
+// Callers:   api/auth.js, api/groups.js, api/items.js, api/alerts.js,
+//            api/conversations.js, api/admin.js, VerifyEmail.jsx
+// Callees:   axios
+// Modified:  2026-03-01
+// ==============================================================================
 import axios from 'axios';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5151';

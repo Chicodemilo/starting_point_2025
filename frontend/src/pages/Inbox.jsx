@@ -1,3 +1,12 @@
+// ==============================================================================
+// File:      frontend/src/pages/Inbox.jsx
+// Purpose:   Unified inbox page with tabbed views for alerts and messages.
+//            Displays alert notifications with mark-read and delete
+//            actions, and lists conversations with unread badges.
+// Callers:   App.jsx (route: /inbox)
+// Callees:   React, react-router-dom, alertStore.js, messagingStore.js
+// Modified:  2026-03-01
+// ==============================================================================
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useAlertStore from '../store/alertStore';

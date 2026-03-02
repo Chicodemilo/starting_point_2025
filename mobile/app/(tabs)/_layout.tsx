@@ -1,3 +1,14 @@
+// ==============================================================================
+// File:      mobile/app/(tabs)/_layout.tsx
+// Purpose:   Tab navigator layout. Defines Home, Groups, and Profile
+//            tabs with icons. Renders a bell icon with unread badge
+//            that opens the inbox modal.
+// Callers:   app/_layout.tsx (Stack.Screen name="(tabs)")
+// Callees:   expo-router, expo-symbols, React Native, Themed, Colors,
+//            useColorScheme, alertStore, messagingStore
+// Modified:  2026-03-01
+// ==============================================================================
+
 import React, { useEffect } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { Tabs, useRouter } from 'expo-router';

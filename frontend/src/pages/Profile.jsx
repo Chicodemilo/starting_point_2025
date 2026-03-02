@@ -1,3 +1,12 @@
+// ==============================================================================
+// File:      frontend/src/pages/Profile.jsx
+// Purpose:   User profile page. Shows user info, avatar with upload
+//            capability, email change form with verification flow, and
+//            a logout button.
+// Callers:   App.jsx (route: /profile)
+// Callees:   React, react-router-dom, authStore.js, api/auth.js
+// Modified:  2026-03-01
+// ==============================================================================
 import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useAuthStore from '../store/authStore';

@@ -1,3 +1,12 @@
+# ==============================================================================
+# File:      api/app/config/group_types.py
+# Purpose:   Defines the allowed group type taxonomy. Provides validation
+#            helpers to check if a given type key is valid. Edit this file
+#            when forking the boilerplate for a new project.
+# Callers:   group_service.py, routes/config.py, config/__init__.py
+# Callees:   (none -- pure data/config)
+# Modified:  2026-03-01
+# ==============================================================================
 # Group Types Configuration
 # Edit this file when forking the boilerplate for your project.
 # Examples:

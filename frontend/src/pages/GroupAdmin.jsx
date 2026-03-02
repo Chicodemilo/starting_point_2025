@@ -1,3 +1,13 @@
+// ==============================================================================
+// File:      frontend/src/pages/GroupAdmin.jsx
+// Purpose:   Group administration page for owners. Allows renaming the
+//            group, uploading an icon, regenerating invite codes, inviting
+//            members by email, changing member roles, and removing members.
+// Callers:   App.jsx (route: /groups/:id/admin)
+// Callees:   React, react-router-dom, groupStore.js, authStore.js,
+//            api/groups.js
+// Modified:  2026-03-01
+// ==============================================================================
 import React, { useEffect, useState, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import useGroupStore from '../store/groupStore';

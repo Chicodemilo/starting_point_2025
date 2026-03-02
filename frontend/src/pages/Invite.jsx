@@ -1,3 +1,12 @@
+// ==============================================================================
+// File:      frontend/src/pages/Invite.jsx
+// Purpose:   Invite acceptance page. Allows an invited user to create
+//            their account by choosing a username and password, using
+//            the invite token from the URL query string.
+// Callers:   App.jsx (route: /invite)
+// Callees:   React, react-router-dom, authStore.js, api/auth.js
+// Modified:  2026-03-01
+// ==============================================================================
 import React, { useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import useAuthStore from '../store/authStore';

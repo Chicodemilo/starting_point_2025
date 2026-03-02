@@ -1,3 +1,12 @@
+// ==============================================================================
+// File:      frontend/src/pages/admin/AdminUsers.jsx
+// Purpose:   Admin user management page. Lists all users with search,
+//            provides admin/verified toggles, user deletion, email
+//            invitations, and per-section permission editing for admins.
+// Callers:   AdminLayout.jsx
+// Callees:   React, adminStore.js, api/admin.js
+// Modified:  2026-03-01
+// ==============================================================================
 import React, { useEffect, useState } from 'react';
 import useAdminStore from '../../store/adminStore';
 import { updateUser, deleteUser, inviteUser, getAdminUsers, updateUserPermissions } from '../../api/admin';

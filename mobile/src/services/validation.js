@@ -1,3 +1,14 @@
+// ==============================================================================
+// File:      mobile/src/services/validation.js
+// Purpose:   Client-side form validation rules, mirroring the web
+//            frontend. Provides validators for email, password,
+//            username, required fields, and a combined registration
+//            validator.
+// Callers:   (auth)/register.tsx
+// Callees:   (none)
+// Modified:  2026-03-01
+// ==============================================================================
+
 // Form validation rules — identical to web frontend
 
 export const validateEmail = (email) => {

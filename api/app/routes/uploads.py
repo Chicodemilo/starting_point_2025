@@ -1,3 +1,12 @@
+# ==============================================================================
+# File:      api/app/routes/uploads.py
+# Purpose:   Uploads route blueprint. Handles avatar and group icon file
+#            uploads with image processing, and serves uploaded files.
+# Callers:   routes/__init__.py
+# Callees:   models/user.py, models/group.py, models/group_member.py,
+#            utils/uploads.py, security/__init__.py, Flask, db
+# Modified:  2026-03-01
+# ==============================================================================
 from flask import Blueprint, request, jsonify, g, send_from_directory
 from app import db
 from app.models.user import User

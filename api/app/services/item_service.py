@@ -1,3 +1,12 @@
+# ==============================================================================
+# File:      api/app/services/item_service.py
+# Purpose:   Item business logic. Handles CRUD operations for generic
+#            content items with pagination, group/user filtering, and
+#            owner/admin permission checks.
+# Callers:   routes/items.py, services/__init__.py
+# Callees:   models/item.py, SQLAlchemy (db), logging
+# Modified:  2026-03-01
+# ==============================================================================
 from app import db
 from app.models.item import Item
 import logging

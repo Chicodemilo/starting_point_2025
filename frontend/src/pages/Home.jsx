@@ -1,3 +1,12 @@
+// ==============================================================================
+// File:      frontend/src/pages/Home.jsx
+// Purpose:   Landing page component. Shows login/register links for guests
+//            and navigation cards (groups, dashboard, profile) for
+//            authenticated users. Redirects to terms if not yet accepted.
+// Callers:   App.jsx (route: /)
+// Callees:   React, react-router-dom, authStore.js
+// Modified:  2026-03-01
+// ==============================================================================
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useAuthStore from '../store/authStore';

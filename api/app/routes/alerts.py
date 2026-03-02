@@ -1,3 +1,11 @@
+# ==============================================================================
+# File:      api/app/routes/alerts.py
+# Purpose:   Alerts route blueprint. Provides user-facing endpoints for
+#            listing, creating, marking as read, and deleting alerts.
+# Callers:   routes/__init__.py
+# Callees:   services/alert_service.py, security/__init__.py, Flask
+# Modified:  2026-03-01
+# ==============================================================================
 from flask import Blueprint, jsonify, request, g
 from app.services.alert_service import AlertService
 from app.security import moderate_rate_limit, token_required

@@ -1,3 +1,13 @@
+// ==============================================================================
+// File:      mobile/app/inbox/conversations.tsx
+// Purpose:   Dedicated conversations list screen. Shows all
+//            conversations with unread badges and last message
+//            preview, linking to individual conversation views.
+// Callers:   Expo Router (screen), inbox/_layout.tsx
+// Callees:   expo-router, React Native, Themed, messagingStore
+// Modified:  2026-03-01
+// ==============================================================================
+
 import React, { useEffect } from 'react';
 import { StyleSheet, TouchableOpacity, FlatList } from 'react-native';
 import { useRouter } from 'expo-router';

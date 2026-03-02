@@ -1,3 +1,15 @@
+# ==============================================================================
+# File:      api/app/services/messaging_service.py
+# Purpose:   Messaging business logic. Manages conversations (group and
+#            direct), message sending/retrieval, unread counts, member
+#            management, and admin conversation overview.
+# Callers:   routes/conversations.py, routes/admin.py,
+#            group_service.py, services/__init__.py
+# Callees:   models/conversation.py, models/conversation_member.py,
+#            models/message.py, models/group_member.py, SQLAlchemy (db),
+#            datetime, sqlalchemy, logging
+# Modified:  2026-03-01
+# ==============================================================================
 from app import db
 from app.models.conversation import Conversation
 from app.models.conversation_member import ConversationMember

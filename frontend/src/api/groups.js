@@ -1,3 +1,12 @@
+// ==============================================================================
+// File:      frontend/src/api/groups.js
+// Purpose:   Group management API functions. Provides CRUD operations for
+//            groups, member management, invite codes, icon uploads, and
+//            email-based member invitations.
+// Callers:   groupStore.js, GroupAdmin.jsx
+// Callees:   api/client.js
+// Modified:  2026-03-01
+// ==============================================================================
 import client from './client';
 
 export const getGroups = async (publicOnly = false) => {

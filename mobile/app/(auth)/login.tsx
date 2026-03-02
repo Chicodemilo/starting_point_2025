@@ -1,3 +1,13 @@
+// ==============================================================================
+// File:      mobile/app/(auth)/login.tsx
+// Purpose:   Login screen. Collects username/email and password, then
+//            delegates authentication to authStore. Links to the
+//            register screen for new users.
+// Callers:   Expo Router (screen), (auth)/_layout.tsx
+// Callees:   expo-router, React Native, Themed, authStore
+// Modified:  2026-03-01
+// ==============================================================================
+
 import React, { useState } from 'react';
 import {
   StyleSheet,

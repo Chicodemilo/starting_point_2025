@@ -1,3 +1,13 @@
+# ==============================================================================
+# File:      api/app/services/alert_service.py
+# Purpose:   Alert business logic. Handles creating, listing, filtering,
+#            marking as read, and deleting alerts. Scopes alerts to users
+#            by direct, group, or system-wide targeting.
+# Callers:   routes/alerts.py, routes/admin.py, services/__init__.py
+# Callees:   models/alert.py, models/group_member.py, SQLAlchemy (db),
+#            datetime, sqlalchemy, logging
+# Modified:  2026-03-01
+# ==============================================================================
 from app import db
 from app.models.alert import Alert
 from app.models.group_member import GroupMember

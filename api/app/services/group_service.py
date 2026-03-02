@@ -1,3 +1,14 @@
+# ==============================================================================
+# File:      api/app/services/group_service.py
+# Purpose:   Group business logic. Handles group CRUD, membership
+#            management, invite codes, email invitations, role updates,
+#            and auto-creation of group conversations.
+# Callers:   routes/groups.py, services/__init__.py
+# Callees:   models/group.py, models/group_member.py, models/user.py,
+#            config/group_types.py, services/messaging_service.py,
+#            utils/email.py, SQLAlchemy (db), logging
+# Modified:  2026-03-01
+# ==============================================================================
 from app import db
 from app.models.group import Group
 from app.models.group_member import GroupMember

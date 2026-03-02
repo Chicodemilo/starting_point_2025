@@ -1,3 +1,12 @@
+// ==============================================================================
+// File:      frontend/src/services/auth.js
+// Purpose:   Token and session management utilities. Provides helpers for
+//            getting, setting, and removing JWT tokens and user data from
+//            localStorage, plus session-clearing logic.
+// Callers:   (none currently — available as a shared utility)
+// Callees:   (none — uses browser localStorage API directly)
+// Modified:  2026-03-01
+// ==============================================================================
 // Token and session management for web frontend
 
 export const getToken = () => localStorage.getItem('token');

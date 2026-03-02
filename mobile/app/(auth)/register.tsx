@@ -1,3 +1,14 @@
+// ==============================================================================
+// File:      mobile/app/(auth)/register.tsx
+// Purpose:   Registration screen. Collects username, email, and
+//            password with client-side validation, then creates the
+//            account via authStore and redirects to check-email.
+// Callers:   Expo Router (screen), (auth)/_layout.tsx
+// Callees:   expo-router, React Native, Themed, authStore,
+//            services/validation
+// Modified:  2026-03-01
+// ==============================================================================
+
 import React, { useState } from 'react';
 import {
   StyleSheet,

@@ -1,3 +1,16 @@
+// ==============================================================================
+// File:      frontend/App.jsx
+// Purpose:   Root application component. Defines all client-side routes and
+//            wraps the app in React Router. Serves as the top-level layout
+//            shell rendered by main.jsx.
+// Callers:   main.jsx
+// Callees:   React, react-router-dom, Home.jsx, Login.jsx, Register.jsx,
+//            Dashboard.jsx, Groups.jsx, GroupDetail.jsx, GroupAdmin.jsx,
+//            VerifyEmail.jsx, CheckEmail.jsx, GroupPicker.jsx, Inbox.jsx,
+//            MessageThread.jsx, Profile.jsx, Terms.jsx, Invite.jsx,
+//            AdminLayout.jsx
+// Modified:  2026-03-01
+// ==============================================================================
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './src/pages/Home';

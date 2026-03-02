@@ -1,3 +1,13 @@
+# ==============================================================================
+# File:      api/app/routes/__init__.py
+# Purpose:   Package init for routes. Imports all blueprint modules and
+#            provides register_blueprints() to mount them on the Flask app.
+# Callers:   app/__init__.py
+# Callees:   routes/auth.py, routes/admin.py, routes/groups.py,
+#            routes/items.py, routes/config.py, routes/logs.py,
+#            routes/alerts.py, routes/conversations.py, routes/uploads.py
+# Modified:  2026-03-01
+# ==============================================================================
 from .auth import auth_bp
 from .admin import admin_bp
 from .groups import groups_bp

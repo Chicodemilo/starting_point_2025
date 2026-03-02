@@ -1,3 +1,13 @@
+// ==============================================================================
+// File:      mobile/app.config.js
+// Purpose:   Expo app configuration. Derives app name and slug from the
+//            EXPO_PUBLIC_APP_NAME environment variable and sets platform-
+//            specific icons, splash screens, and plugins.
+// Callers:   Expo CLI (build/start entry point)
+// Callees:   expo-router (plugin)
+// Modified:  2026-03-01
+// ==============================================================================
+
 const appName = process.env.EXPO_PUBLIC_APP_NAME || "My App";
 const slug = appName.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "");
 

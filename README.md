@@ -1,278 +1,155 @@
 # Starting Point 2025
 
-> A clean, forkable full-stack boilerplate for building web and mobile apps. Fork it, rename it, build on it.
+A full-stack boilerplate for web and mobile apps. React + Flask + MySQL + Expo, wired together with Docker Compose. Fork it, rename it, build on it.
 
-**Last updated:** March 2026
-
----
-
-## Tech Stack
-
-| Layer | Technology |
-|-------|-----------|
-| **Backend API** | Python 3.11, Flask 2.3, SQLAlchemy, Flask-Migrate |
-| **Web Frontend** | React 18, Vite, Zustand, React Router |
-| **Mobile App** | Expo (React Native), expo-router, Zustand |
-| **Database** | MySQL 8.0 |
-| **Auth** | JWT (PyJWT), bcrypt password hashing |
-| **Infrastructure** | Docker Compose, Nginx, phpMyAdmin |
-| **Testing** | pytest (backend), Vitest (frontend) |
-| **CI/CD** | GitHub Actions |
+For the full technical reference (stack, schema, API endpoints, directory structure, gotchas), see [TECHNICAL.md](TECHNICAL.md).
 
 ---
 
-## Quick Start
+## What's In The Box
+
+- **Backend**: Flask API with JWT auth, groups, messaging, alerts, file uploads
+- **Web Frontend**: React (Vite) with Zustand state management
+- **Mobile App**: Expo (React Native) with the same API and stores
+- **Admin Panel**: Terminal-themed admin site with user management, permissions, health monitoring
+- **Database**: MySQL 8.0 with phpMyAdmin
+- **Infrastructure**: Docker Compose, Nginx reverse proxy, automated backups
+
+Everything runs locally with one command. No external services required.
+
+---
+
+## Prerequisites
+
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/) (includes Docker Compose)
+- [Node.js](https://nodejs.org/) 18+ (for the mobile app)
+- A terminal
+
+---
+
+## Getting Started
+
+### 1. Clone and configure
 
 ```bash
-# 1. Clone and enter
-git clone <your-repo-url>
+git clone https://github.com/Chicodemilo/starting_point_2025.git
 cd starting_point_2025
-
-# 2. Copy environment config
 cp .env.example .env
-# Edit .env with your values (passwords, secret key, etc.)
+```
 
-# 3. Start everything
+Open `.env` and change at minimum:
+- `SECRET_KEY` — any random string, used to sign JWTs
+- `MYSQL_ROOT_PASSWORD` and `MYSQL_PASSWORD` — database passwords
+- `ADMIN_PASSWORD` — your admin account password
+
+### 2. Start the stack
+
+```bash
 docker compose up --build
-
-# 4. Access
-# API:          http://localhost:5151
-# Frontend:     http://localhost:3151
-# phpMyAdmin:   http://localhost:8080
-# Admin panel:  http://localhost:3151/overview
 ```
 
-The admin user is automatically seeded from your `.env` values on first boot.
+Or use the start script to name your project:
+
+```bash
+./start.sh "My Project Name"
+```
+
+This sets the app name in container names, the web page title, and email subjects.
+
+Wait for all services to start (first build takes a few minutes). You'll know it's ready when you see the Flask API logging requests.
+
+### 3. Open the app
+
+| What | URL |
+|------|-----|
+| Web app | http://localhost:3151 |
+| API | http://localhost:5151 |
+| phpMyAdmin | http://localhost:8080 |
+
+Register a new account on the web app. You'll get a verification email — since SMTP isn't configured by default, the verification link is printed to the API container logs:
+
+```bash
+docker compose logs api
+```
+
+Look for the banner that says `EMAIL VERIFICATION` with a URL. Open that URL to verify your account.
 
 ---
 
-## Project Structure
+## Admin Panel
 
-```
-starting_point_2025/
-├── api/                          # Flask backend
-│   ├── main.py                   # Entry point
-│   ├── requirements.txt
-│   ├── Dockerfile
-│   └── app/
-│       ├── __init__.py           # App factory
-│       ├── config/
-│       │   ├── settings.py       # Config from env vars
-│       │   └── group_types.py    # ← Edit this per project
-│       ├── models/
-│       │   ├── user.py
-│       │   ├── group.py
-│       │   ├── group_member.py
-│       │   └── item.py
-│       ├── routes/
-│       │   ├── auth.py           # /api/auth/*
-│       │   ├── groups.py         # /api/groups/*
-│       │   ├── items.py          # /api/items/*
-│       │   ├── admin.py          # /api/admin/*
-│       │   └── config.py         # /api/config/*
-│       ├── services/
-│       │   ├── auth_service.py
-│       │   ├── group_service.py
-│       │   └── item_service.py
-│       ├── security/
-│       │   ├── auth_middleware.py
-│       │   ├── rate_limiter.py
-│       │   └── security_headers.py
-│       └── tests/
-│           ├── conftest.py
-│           ├── test_auth.py
-│           ├── test_groups.py
-│           ├── test_items.py
-│           └── test_health.py
-│
-├── frontend/                     # React web app
-│   ├── App.jsx                   # Routes
-│   ├── package.json
-│   ├── vite.config.js
-│   └── src/
-│       ├── api/                  # API client layer
-│       │   ├── client.js         # Axios + JWT interceptor
-│       │   ├── auth.js
-│       │   ├── groups.js
-│       │   ├── items.js
-│       │   └── admin.js
-│       ├── store/                # Zustand state
-│       │   ├── authStore.js
-│       │   ├── groupStore.js
-│       │   ├── itemStore.js
-│       │   └── adminStore.js
-│       ├── services/
-│       │   ├── auth.js           # Token/session management
-│       │   └── validation.js     # Form validation
-│       ├── pages/
-│       │   ├── Home.jsx
-│       │   ├── Login.jsx
-│       │   ├── Register.jsx
-│       │   ├── Dashboard.jsx
-│       │   ├── Groups.jsx
-│       │   ├── GroupDetail.jsx
-│       │   └── admin/
-│       │       ├── AdminLayout.jsx
-│       │       ├── AdminDashboard.jsx
-│       │       ├── AdminUsers.jsx
-│       │       └── AdminGroups.jsx
-│       └── __tests__/
-│           ├── validation.test.js
-│           └── stores.test.js
-│
-├── mobile/                       # Expo React Native app
-│   ├── app.json
-│   ├── package.json
-│   ├── app/
-│   │   ├── _layout.tsx           # Root layout + auth guard
-│   │   ├── (auth)/
-│   │   │   ├── login.tsx
-│   │   │   └── register.tsx
-│   │   └── (tabs)/
-│   │       ├── _layout.tsx       # Tab bar (Home, Groups, Profile)
-│   │       ├── index.tsx         # Home tab
-│   │       ├── profile.tsx       # Profile tab
-│   │       └── groups/
-│   │           ├── index.tsx     # Groups list
-│   │           ├── create.tsx    # Create group
-│   │           ├── join.tsx      # Join with invite code
-│   │           └── [id].tsx      # Group detail
-│   └── src/                      # ← Same structure as frontend/src/
-│       ├── api/
-│       │   ├── client.js         # Axios + SecureStore JWT
-│       │   ├── auth.js
-│       │   ├── groups.js
-│       │   └── items.js
-│       ├── store/
-│       │   ├── authStore.js
-│       │   ├── groupStore.js
-│       │   └── itemStore.js
-│       └── services/
-│           ├── auth.js           # SecureStore token mgmt
-│           └── validation.js     # Same validation rules
-│
-├── mysql/
-│   ├── Dockerfile
-│   └── init/
-│       ├── 01-init-db.sql        # Schema
-│       └── 02-test-data.sql      # Seed data
-│
-├── nginx/
-│   ├── default.conf
-│   ├── nginx.conf
-│   └── nginx.prod.conf
-│
-├── scripts/
-│   ├── deploy_local.sh
-│   ├── deploy_gcp.sh
-│   ├── backup.sh
-│   ├── backup_db.sh
-│   ├── restore.sh
-│   ├── health_check.sh
-│   └── setup_backup_cron.sh
-│
-├── .github/workflows/ci.yml     # GitHub Actions CI
-├── docker-compose.yml
-├── .env.example
-└── .gitignore
-```
+The admin panel is at **http://localhost:3151/overview**.
+
+Log in with the credentials from your `.env` file (defaults: `admin` / `change_me_admin_password`).
+
+The admin is automatically created on first boot. If you change the admin credentials in `.env`, you need to either:
+- Delete the database volume and rebuild: `docker compose down -v && docker compose up --build`
+- Or update the admin user manually via phpMyAdmin at http://localhost:8080
+
+### Admin sections
+
+- **Dashboard** — user/group/item/alert/message counts
+- **Users** — search users, toggle admin, invite new users by email, set per-section permissions
+- **Groups** — browse and delete groups
+- **Alerts** — view all alerts, send system/group/user alerts
+- **Messages** — view conversations, broadcast messages
+- **Health** — live system health (auto-refreshes), test results
+- **Terms** — edit terms & conditions, reset all user acceptances
+
+Admin permissions are per-section. A super admin can restrict other admins to only see certain sections (e.g., Users only).
 
 ---
 
-## API Endpoints
+## Mobile App (Expo)
 
-### Auth
-| Method | Path | Description |
-|--------|------|-------------|
-| POST | `/api/auth/register` | Create account |
-| POST | `/api/auth/login` | Log in, get JWT |
-| GET | `/api/auth/verify` | Verify token |
-| GET | `/api/auth/profile` | Get current user |
+The mobile app runs outside Docker via Expo.
 
-### Groups
-| Method | Path | Description |
-|--------|------|-------------|
-| GET | `/api/groups` | List user's groups |
-| POST | `/api/groups` | Create group |
-| GET | `/api/groups/:id` | Group detail + members |
-| PUT | `/api/groups/:id` | Update group |
-| DELETE | `/api/groups/:id` | Delete group (owner only) |
-| POST | `/api/groups/join` | Join via invite code |
-| POST | `/api/groups/:id/invite` | Regenerate invite code |
+### On your Mac
 
-### Items
-| Method | Path | Description |
-|--------|------|-------------|
-| GET | `/api/items` | List items (paginated) |
-| POST | `/api/items` | Create item |
-| PUT | `/api/items/:id` | Update item |
-| DELETE | `/api/items/:id` | Delete item |
-
-### Config
-| Method | Path | Description |
-|--------|------|-------------|
-| GET | `/api/config/group-types` | Get available group types |
-
-### Admin
-| Method | Path | Description |
-|--------|------|-------------|
-| POST | `/api/admin/login` | Admin login |
-| GET | `/api/admin/stats` | Dashboard stats |
-| GET | `/api/admin/users` | List users (search, paginate) |
-| PUT | `/api/admin/users/:id` | Update user |
-| DELETE | `/api/admin/users/:id` | Delete user |
-| GET | `/api/admin/groups` | List groups (search, filter) |
-| DELETE | `/api/admin/groups/:id` | Delete group |
-
----
-
-## Customization Guide
-
-### 1. Group Types (edit one file)
-
-Edit `api/app/config/group_types.py`:
-
-```python
-GROUP_TYPES = [
-    {"key": "book_club", "label": "Book Club"},
-    {"key": "movie_club", "label": "Movie Club"},
-]
+```bash
+cd mobile
+npm install
+npx expo start
 ```
 
-The mobile and web apps pull types from the `/api/config/group-types` endpoint automatically.
+This opens the Expo dev tools in your terminal. From there:
 
-### 2. Add New Models
+- Press **i** to open in the iOS Simulator (requires Xcode)
+- Press **a** to open in the Android Emulator (requires Android Studio)
+- Scan the QR code with [Expo Go](https://expo.dev/go) on a physical device
 
-1. Create `api/app/models/your_model.py`
-2. Import it in `api/app/models/__init__.py`
-3. Add a service in `api/app/services/`
-4. Add routes in `api/app/routes/`
-5. Register the blueprint in `api/app/routes/__init__.py`
-6. Add API functions in `frontend/src/api/` and `mobile/src/api/`
-7. Add a Zustand store in `frontend/src/store/` and `mobile/src/store/`
+### Connecting to your API
 
-### 3. Environment Variables
+**Simulator/Emulator**: The default `localhost:5151` should work.
 
-All config is in `.env`. See `.env.example` for the full list. Key vars:
+**Physical device**: Your phone needs to reach the API over your local network. Find your Mac's local IP:
 
-- `APP_NAME` — Used in API responses
-- `SECRET_KEY` — JWT signing key (change this!)
-- `ADMIN_USERNAME/EMAIL/PASSWORD` — Auto-seeded admin account
-- `VITE_API_URL` — Frontend API base URL
-- `EXPO_API_URL` — Mobile app API base URL
+```bash
+ipconfig getifaddr en0
+```
+
+Then set the API URL before starting Expo:
+
+```bash
+EXPO_PUBLIC_API_URL=http://192.168.1.XXX:5151 npx expo start
+```
+
+Replace `192.168.1.XXX` with your actual IP. Your phone and Mac must be on the same Wi-Fi network.
 
 ---
 
 ## Running Tests
 
-### Backend (pytest)
+### Backend
+
 ```bash
 cd api
 pip install -r requirements.txt
 DATABASE_URL=sqlite:///:memory: SECRET_KEY=test pytest app/tests/ -v
 ```
 
-### Frontend (Vitest)
+### Frontend
+
 ```bash
 cd frontend
 npm install
@@ -281,54 +158,42 @@ npm test
 
 ---
 
-## Docker Services
+## Stopping and Cleaning Up
 
-| Service | Port | Description |
-|---------|------|-------------|
-| `api` | 5151 | Flask API |
-| `frontend` | 3151 | React + Vite |
-| `db` | 3316 | MySQL 8.0 |
-| `phpmyadmin` | 8080 | Database browser |
-| `nginx` | 80 | Reverse proxy (production) |
+```bash
+# Stop all services (keeps data)
+docker compose down
 
-All ports are configurable via `.env`.
+# Stop and delete all data (database, uploads)
+docker compose down -v
+```
+
+---
+
+## Project Configuration
+
+All settings are in `.env`. The main ones:
+
+| Variable | What it does |
+|----------|-------------|
+| `APP_NAME` | App name in UI, emails, container names |
+| `SECRET_KEY` | JWT signing (change this) |
+| `ADMIN_USERNAME` / `ADMIN_EMAIL` / `ADMIN_PASSWORD` | Auto-created admin account |
+| `FRONTEND_PORT` | Web app port (default 3151) |
+| `BACKEND_PORT` | API port (default 5151) |
+| `SMTP_*` | Email config (optional — logs to console if not set) |
+
+To customize group types (team, club, league, etc.), edit `api/app/config/group_types.py`.
 
 ---
 
 ## Scripts
 
-| Script | Description |
+| Script | What it does |
 |--------|-------------|
-| `scripts/deploy_local.sh` | Build and start locally |
-| `scripts/deploy_gcp.sh` | Deploy to GCP |
-| `scripts/backup.sh` | Full project backup |
-| `scripts/backup_db.sh` | Database backup only |
+| `./start.sh "Name"` | Start with a project name |
+| `scripts/deploy_local.sh` | Build and start |
+| `scripts/health_check.sh` | Check all services |
+| `scripts/backup_db.sh` | Back up the database |
 | `scripts/restore.sh` | Restore from backup |
-| `scripts/health_check.sh` | Check service health |
-| `scripts/setup_backup_cron.sh` | Set up automated backups |
-
----
-
-## Mobile App (Expo)
-
-```bash
-cd mobile
-npm install
-npx expo start
-```
-
-Scan the QR code with Expo Go, or press `i` for iOS simulator / `a` for Android emulator.
-
-Set `EXPO_PUBLIC_API_URL` in your environment for the mobile app to connect to your API. For physical devices on the same network, use your machine's local IP instead of `localhost`.
-
----
-
-## Admin Panel
-
-Access at `http://localhost:3151/overview`. Features:
-
-- **Dashboard** — User count, group count, item count, recent signups
-- **Users** — Search, toggle admin status, delete users
-- **Groups** — Search, filter by type, delete groups
-
-Admin credentials are set in `.env` and auto-seeded on first boot.
+| `scripts/run_tests.sh` | Run backend + frontend tests |

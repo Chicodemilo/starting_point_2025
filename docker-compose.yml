@@ -46,7 +46,7 @@ services:
     depends_on:
       - api
     ports:
-      - "${FRONTEND_PORT:-3151}:3000"
+      - "${FRONTEND_PORT:-3151}:80"
     networks:
       - app-network
 

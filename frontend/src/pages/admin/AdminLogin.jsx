@@ -11,14 +11,14 @@ import React, { useState } from 'react';
 import useAdminStore from '../../store/adminStore';
 
 function AdminLogin({ onLogin }) {
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const { login, loading, error, clearError } = useAdminStore();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await login(email, password);
+      await login(username, password);
       if (onLogin) onLogin();
     } catch {}
   };
@@ -32,8 +32,8 @@ function AdminLogin({ onLogin }) {
 
         <form onSubmit={handleSubmit}>
           <div style={t.field}>
-            <label style={t.label}>email:</label>
-            <input type="email" value={email} onChange={(e) => { setEmail(e.target.value); clearError(); }} required style={t.input} placeholder="admin@example.com" />
+            <label style={t.label}>username:</label>
+            <input type="text" value={username} onChange={(e) => { setUsername(e.target.value); clearError(); }} required style={t.input} placeholder="admin" />
           </div>
           <div style={t.field}>
             <label style={t.label}>password:</label>
@@ -48,7 +48,7 @@ function AdminLogin({ onLogin }) {
         </form>
 
         <div style={t.hint}>
-          dev: admin@example.com / admin123
+          dev: admin / change_me_admin_password
         </div>
       </div>
     </div>

@@ -20,10 +20,10 @@ const useAdminStore = create((set, get) => ({
   loading: false,
   error: null,
 
-  login: async (email, password) => {
+  login: async (username, password) => {
     set({ loading: true, error: null });
     try {
-      const data = await adminLogin(email, password);
+      const data = await adminLogin(username, password);
       if (data.success) {
         localStorage.setItem('admin_token', data.token);
         localStorage.setItem('admin_user', JSON.stringify(data.user));

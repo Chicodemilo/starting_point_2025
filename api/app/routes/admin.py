@@ -40,12 +40,14 @@ def admin_login():
         if not data:
             return jsonify({'success': False, 'message': 'No data provided'}), 400
 
-        email = data.get('email')
+        username = data.get('username')
         password = data.get('password')
-        if not email or not password:
-            return jsonify({'success': False, 'message': 'Email and password are required'}), 400
+        if not username or not password:
+            return jsonify({'success': False, 'message': 'Username and password are required'}), 400
 
-        user = User.query.filter_by(email=email).first()
+        user = User.query.filter(
+            (User.username == username) | (User.email == username)
+        ).first()
         if not user or not user.check_password(password):
             return jsonify({'success': False, 'message': 'Invalid credentials'}), 401
 

@@ -10,8 +10,8 @@
 // ==============================================================================
 import client from './client';
 
-export const adminLogin = async (email, password) => {
-  const { data } = await client.post('/api/admin/login', { email, password });
+export const adminLogin = async (username, password) => {
+  const { data } = await client.post('/api/admin/login', { username, password });
   return data;
 };
 

@@ -164,7 +164,7 @@ if [ "$ENV" = "local" ]; then
   
   # Test main home page with security features
   HOME_RESPONSE=$(curl -s "http://localhost:${BACKEND_PORT}/" 2>/dev/null)
-  if echo "$HOME_RESPONSE" | grep -q "security\|monitoring\|Right to Remain" -i; then
+  if echo "$HOME_RESPONSE" | grep -q "security\|monitoring\|My App" -i; then
     echo "  ✅ Home page contains security features"
   else
     echo "  ⚠️  Home page may not contain expected security features"

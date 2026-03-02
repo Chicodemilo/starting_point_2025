@@ -1,0 +1,78 @@
+import { create } from 'zustand';
+import { adminLogin, getStats, getUsers, getAdminGroups } from '../api/admin';
+
+const useAdminStore = create((set, get) => ({
+  isAuthenticated: !!localStorage.getItem('admin_token'),
+  adminUser: JSON.parse(localStorage.getItem('admin_user') || 'null'),
+  stats: null,
+  users: [],
+  groups: [],
+  loading: false,
+  error: null,
+
+  login: async (email, password) => {
+    set({ loading: true, error: null });
+    try {
+      const data = await adminLogin(email, password);
+      if (data.success) {
+        localStorage.setItem('admin_token', data.token);
+        localStorage.setItem('admin_user', JSON.stringify(data.user));
+        set({ isAuthenticated: true, adminUser: data.user, loading: false });
+      }
+      return data;
+    } catch (error) {
+      set({ error: error.response?.data?.message || 'Login failed', loading: false });
+      throw error;
+    }
+  },
+
+  logout: () => {
+    localStorage.removeItem('admin_token');
+    localStorage.removeItem('admin_user');
+    set({ isAuthenticated: false, adminUser: null, stats: null });
+  },
+
+  fetchStats: async () => {
+    set({ loading: true });
+    try {
+      const stats = await getStats();
+      set({ stats, loading: false });
+    } catch (error) {
+      set({ error: 'Failed to load stats', loading: false });
+    }
+  },
+
+  fetchUsers: async (params) => {
+    set({ loading: true });
+    try {
+      const data = await getUsers(params);
+      set({ users: data.users, loading: false });
+      return data;
+    } catch (error) {
+      set({ error: 'Failed to load users', loading: false });
+    }
+  },
+
+  fetchGroups: async (params) => {
+    set({ loading: true });
+    try {
+      const data = await getAdminGroups(params);
+      set({ groups: data.groups, loading: false });
+      return data;
+    } catch (error) {
+      set({ error: 'Failed to load groups', loading: false });
+    }
+  },
+
+  initialize: () => {
+    const token = localStorage.getItem('admin_token');
+    const user = localStorage.getItem('admin_user');
+    if (token && user) {
+      set({ isAuthenticated: true, adminUser: JSON.parse(user) });
+    }
+  },
+
+  clearError: () => set({ error: null }),
+}));
+
+export default useAdminStore;

@@ -1,0 +1,62 @@
+import React, { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import { verifyEmail } from '../api/auth';
+
+function VerifyEmail() {
+  const [searchParams] = useSearchParams();
+  const [status, setStatus] = useState('verifying');
+  const [message, setMessage] = useState('');
+
+  useEffect(() => {
+    const token = searchParams.get('token');
+    if (!token) {
+      setStatus('error');
+      setMessage('No verification token provided.');
+      return;
+    }
+    verifyEmail(token)
+      .then(() => {
+        setStatus('success');
+        setMessage('Your email has been verified!');
+      })
+      .catch((err) => {
+        setStatus('error');
+        setMessage(err.response?.data?.error || 'Verification failed. The link may be invalid or expired.');
+      });
+  }, [searchParams]);
+
+  return (
+    <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#f5f5f5' }}>
+      <div style={{ backgroundColor: 'white', padding: '40px', borderRadius: '12px', boxShadow: '0 4px 6px rgba(0,0,0,0.1)', width: '100%', maxWidth: '400px', textAlign: 'center' }}>
+        {status === 'verifying' && (
+          <>
+            <h1 style={{ color: '#2c3e50' }}>Verifying...</h1>
+            <p style={{ color: '#7f8c8d' }}>Please wait while we verify your email.</p>
+          </>
+        )}
+        {status === 'success' && (
+          <>
+            <div style={{ fontSize: '48px', marginBottom: '16px' }}>&#10003;</div>
+            <h1 style={{ color: '#27ae60' }}>Email Verified!</h1>
+            <p style={{ color: '#7f8c8d' }}>{message}</p>
+            <a href="/login" style={{ display: 'inline-block', marginTop: '20px', padding: '12px 32px', backgroundColor: '#3498db', color: 'white', textDecoration: 'none', borderRadius: '6px' }}>
+              Log In
+            </a>
+          </>
+        )}
+        {status === 'error' && (
+          <>
+            <div style={{ fontSize: '48px', marginBottom: '16px', color: '#e74c3c' }}>&#10007;</div>
+            <h1 style={{ color: '#e74c3c' }}>Verification Failed</h1>
+            <p style={{ color: '#7f8c8d' }}>{message}</p>
+            <a href="/login" style={{ display: 'inline-block', marginTop: '20px', padding: '12px 32px', backgroundColor: '#3498db', color: 'white', textDecoration: 'none', borderRadius: '6px' }}>
+              Go to Login
+            </a>
+          </>
+        )}
+      </div>
+    </div>
+  );
+}
+
+export default VerifyEmail;

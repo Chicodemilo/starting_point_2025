@@ -9,7 +9,7 @@ services:
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     ports:
-      - "3316:3306"
+      - "${DB_PORT:-3316}:3306"
     volumes:
       - mysql_data:/var/lib/mysql
       - ./mysql/init:/docker-entrypoint-initdb.d
@@ -24,18 +24,31 @@ services:
     environment:
       - DATABASE_URL=mysql+pymysql://${MYSQL_USER}:${MYSQL_PASSWORD}@db:3306/${MYSQL_DATABASE}
       - SECRET_KEY=${SECRET_KEY}
+      - ADMIN_USERNAME=${ADMIN_USERNAME:-admin}
+      - ADMIN_EMAIL=${ADMIN_EMAIL:-admin@example.com}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD:-change_me_admin_password}
+      - APP_NAME=${APP_NAME:-My App}
+      - FRONTEND_URL=${FRONTEND_URL:-http://localhost:3151}
+      - SMTP_HOST=${SMTP_HOST:-}
+      - SMTP_PORT=${SMTP_PORT:-587}
+      - SMTP_USER=${SMTP_USER:-}
+      - SMTP_PASSWORD=${SMTP_PASSWORD:-}
+      - SMTP_FROM_EMAIL=${SMTP_FROM_EMAIL:-}
     volumes:
       - ./logs:/app/logs
     networks:
       - app-network
 
   frontend:
-    build: ./frontend
+    build:
+      context: ./frontend
+      args:
+        - VITE_APP_NAME=${APP_NAME:-My App}
     container_name: frontend
     depends_on:
       - api
     ports:
-      - "3151:3000"
+      - "${FRONTEND_PORT:-3151}:3000"
     networks:
       - app-network
 
@@ -45,7 +58,7 @@ services:
     depends_on:
       - frontend
     ports:
-      - "5151:80"
+      - "${BACKEND_PORT:-5151}:80"
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
     networks:
@@ -56,6 +69,20 @@ services:
       timeout: 10s
       retries: 3
       start_period: 10s
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: phpmyadmin
+    ports:
+      - "${PHPMYADMIN_PORT:-8080}:80"
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    depends_on:
+      - db
+    networks:
+      - app-network
 
 volumes:
   mysql_data:

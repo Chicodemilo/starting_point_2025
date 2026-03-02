@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# backup.sh - Backup database and logs for Right to Remain project
+# backup.sh - Backup database and logs
 # Usage: ./scripts/backup.sh [backup_name]
 # If no backup_name provided, uses timestamp
 
@@ -35,7 +35,7 @@ else
 fi
 
 # Default values if not in .env
-MYSQL_DATABASE=${MYSQL_DATABASE:-righttoremainfucked}
+MYSQL_DATABASE=${MYSQL_DATABASE:-app_db}
 MYSQL_USER=${MYSQL_USER:-admin}
 MYSQL_PASSWORD=${MYSQL_PASSWORD:-password}
 MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-rootpassword}
@@ -119,7 +119,7 @@ Backup Information
 ==================
 Backup Name: $BACKUP_NAME
 Created: $(date)
-Project: Right to Remain
+Project: My App
 Database: $MYSQL_DATABASE
 User: $MYSQL_USER
 
@@ -161,7 +161,7 @@ create_archive() {
 
 # Main execution
 main() {
-    echo -e "${BLUE}🚀 Right to Remain - Database & Logs Backup${NC}"
+    echo -e "${BLUE}🚀 Database & Logs Backup${NC}"
     echo "=============================================="
     
     # Check if containers are running (with option to continue)

@@ -1,9 +1,0 @@
-[2025-07-18 17:03:21] Test entry for known issues: this should appear in the known_issues.txt log.
-
-
-[2025-07-19 19:09:12] The health_check.sh script can fail on 'api health endpoint reachable' and 'frontend reachable' due to a race condition. The checks run before the internal servers are fully booted. A retry loop or wait period should be added.
-
-
-[2025-07-21 11:28:05] Frontend build failing due to React component import/export issues - Header.jsx not exporting default, complex component dependencies need resolution
-
-

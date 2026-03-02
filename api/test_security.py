@@ -15,7 +15,7 @@ TEST_USER = {'username': 'admin', 'password': 'admin123'}
 
 def test_security_endpoints():
     """Test all security-enhanced endpoints"""
-    print("🔒 Testing Right to Remain API Security Integration")
+    print("🔒 Testing API Security Integration")
     print("=" * 60)
     
     # Test 1: Basic API status

@@ -71,7 +71,7 @@ fi
 
 echo "Clearing Docker build cache and removing project images..."
 docker builder prune -f
-docker images | grep righttoremainfucked | awk '{print $3}' | xargs -r docker rmi -f || echo "Note: Some images couldn't be removed (may be in use)"
+docker images | grep myapp | awk '{print $3}' | xargs -r docker rmi -f || echo "Note: Some images couldn't be removed (may be in use)"
 
 if [ "$PRESERVE_DATA" = true ]; then
   echo "🔄 Building and starting services with data preservation..."

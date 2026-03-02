@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Main entry point for the Right to Remain Flask API
+Main entry point for the Flask API
 Security-enhanced with comprehensive middleware integration
 """
 
@@ -19,7 +19,7 @@ logger = logging.getLogger(__name__)
 app = create_app()
 
 # Log application startup
-logger.info("Right to Remain API starting with security middleware enabled")
+logger.info("API starting with security middleware enabled")
 logger.info(f"Security features: Rate limiting, JWT auth, Security headers, CORS protection")
 
 if __name__ == '__main__':

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# restore.sh - Restore database and logs for Right to Remain project
+# restore.sh - Restore database and logs
 # Usage: ./scripts/restore.sh <backup_file.tar.gz>
 
 set -e
@@ -63,7 +63,7 @@ else
 fi
 
 # Default values if not in .env
-MYSQL_DATABASE=${MYSQL_DATABASE:-righttoremainfucked}
+MYSQL_DATABASE=${MYSQL_DATABASE:-app_db}
 MYSQL_USER=${MYSQL_USER:-admin}
 MYSQL_PASSWORD=${MYSQL_PASSWORD:-password}
 MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-rootpassword}
@@ -250,7 +250,7 @@ verify_restore() {
 
 # Main execution
 main() {
-    echo -e "${BLUE}🚀 Right to Remain - Database & Logs Restore${NC}"
+    echo -e "${BLUE}🚀 Database & Logs Restore${NC}"
     echo "=============================================="
     
     # Extract backup

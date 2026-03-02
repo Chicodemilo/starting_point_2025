@@ -15,6 +15,10 @@ RUN npm install
 # Copy source code
 COPY . .
 
+# Accept APP_NAME at build time for Vite
+ARG VITE_APP_NAME="My App"
+ENV VITE_APP_NAME=$VITE_APP_NAME
+
 # Build the application
 RUN npm run build
 

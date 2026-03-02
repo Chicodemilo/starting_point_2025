@@ -8,6 +8,12 @@ set -euo pipefail
 PROJECT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$PROJECT_DIR"
 
+# Auto-create .env from .env.example if it doesn't exist
+if [ ! -f .env ] && [ -f .env.example ]; then
+  cp .env.example .env
+  echo "Created .env from .env.example (edit passwords before production use)"
+fi
+
 # Load .env if it exists
 if [ -f .env ]; then
   set -a
@@ -18,6 +24,7 @@ fi
 # Use CLI arg if provided, otherwise fall back to env/default
 if [ -n "${1:-}" ]; then
   export APP_NAME="$1"
+  shift
 fi
 APP_NAME="${APP_NAME:-My App}"
 

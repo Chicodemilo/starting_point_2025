@@ -160,15 +160,15 @@ function AdminUsers() {
         <div style={{ color: '#9ca3af', fontSize: '13px', marginBottom: '8px' }}>invite_user:</div>
         <form onSubmit={handleInvite} style={{ display: 'flex', gap: '8px' }}>
           <input type="email" placeholder="user@example.com" value={inviteEmail} onChange={(e) => setInviteEmail(e.target.value)} required style={t.input} />
-          <button type="submit" style={t.submitBtn}>> send</button>
+          <button type="submit" style={t.submitBtn}>{'>'} send</button>
         </form>
         {inviteMsg && <div style={{ color: inviteMsg.ok ? '#4ade80' : '#ef4444', fontSize: '12px', marginTop: '6px' }}>{inviteMsg.text}</div>}
       </div>
 
       {/* Tabs */}
       <div style={{ display: 'flex', gap: '4px', marginBottom: '16px' }}>
-        <button onClick={() => setTab('all')} style={{ ...t.tabBtn, color: tab === 'all' ? '#4ade80' : '#6b7280', borderBottom: tab === 'all' ? '1px solid #4ade80' : '1px solid transparent' }}>> all</button>
-        <button onClick={() => setTab('admins')} style={{ ...t.tabBtn, color: tab === 'admins' ? '#4ade80' : '#6b7280', borderBottom: tab === 'admins' ? '1px solid #4ade80' : '1px solid transparent' }}>> admins</button>
+        <button onClick={() => setTab('all')} style={{ ...t.tabBtn, color: tab === 'all' ? '#4ade80' : '#6b7280', borderBottom: tab === 'all' ? '1px solid #4ade80' : '1px solid transparent' }}>{'>'} all</button>
+        <button onClick={() => setTab('admins')} style={{ ...t.tabBtn, color: tab === 'admins' ? '#4ade80' : '#6b7280', borderBottom: tab === 'admins' ? '1px solid #4ade80' : '1px solid transparent' }}>{'>'} admins</button>
       </div>
 
       {tab === 'all' && (

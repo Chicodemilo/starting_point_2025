@@ -1,7 +1,6 @@
 services:
   db:
     build: ./mysql
-    container_name: db
     restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
@@ -18,7 +17,6 @@ services:
 
   api:
     build: ./api
-    container_name: api
     depends_on:
       - db
     environment:
@@ -45,7 +43,6 @@ services:
       context: ./frontend
       args:
         - VITE_APP_NAME=${APP_NAME:-My App}
-    container_name: frontend
     depends_on:
       - api
     ports:
@@ -55,7 +52,6 @@ services:
 
   nginx:
     image: nginx:alpine
-    container_name: nginx
     depends_on:
       - frontend
     ports:
@@ -73,7 +69,6 @@ services:
 
   phpmyadmin:
     image: phpmyadmin:latest
-    container_name: phpmyadmin
     ports:
       - "${PHPMYADMIN_PORT:-8080}:80"
     environment:

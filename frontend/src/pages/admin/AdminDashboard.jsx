@@ -35,7 +35,7 @@ function AdminDashboard() {
       <h2 style={t.h2}>quick_links</h2>
       <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
         {['users', 'groups', 'alerts', 'messages', 'health', 'terms'].map(s => (
-          <a key={s} href={`/overview/${s}`} style={t.link}>> {s}</a>
+          <a key={s} href={`/overview/${s}`} style={t.link}>{'>'} {s}</a>
         ))}
       </div>
     </div>

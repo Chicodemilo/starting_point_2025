@@ -63,7 +63,7 @@ function AdminAlerts() {
           <label style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '8px', fontSize: '13px', color: '#9ca3af' }}>
             <input type="checkbox" checked={form.is_urgent} onChange={e => setForm({...form, is_urgent: e.target.checked})} /> urgent
           </label>
-          <button type="submit" style={t.submitBtn}>> send</button>
+          <button type="submit" style={t.submitBtn}>{'>'} send</button>
         </form>
       </div>
 

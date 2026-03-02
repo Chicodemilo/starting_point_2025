@@ -45,7 +45,7 @@ function AdminMessages() {
         <form onSubmit={handleBroadcast}>
           <input placeholder="title" value={broadcastForm.title} onChange={e => setBroadcastForm({...broadcastForm, title: e.target.value})} required style={t.input} />
           <textarea placeholder="content" value={broadcastForm.content} onChange={e => setBroadcastForm({...broadcastForm, content: e.target.value})} style={{ ...t.input, height: '50px' }} />
-          <button type="submit" style={t.submitBtn}>> broadcast</button>
+          <button type="submit" style={t.submitBtn}>{'>'} broadcast</button>
         </form>
       </div>
 

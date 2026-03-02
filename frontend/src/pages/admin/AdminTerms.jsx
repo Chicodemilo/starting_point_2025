@@ -65,7 +65,7 @@ function AdminTerms() {
         <button onClick={handleSave} disabled={saving} style={{ ...t.btn, color: '#4ade80' }}>
           {saving ? '> saving...' : '> save'}
         </button>
-        <button onClick={handleReset} style={{ ...t.btn, color: '#f59e0b' }}>> reset_all</button>
+        <button onClick={handleReset} style={{ ...t.btn, color: '#f59e0b' }}>{'>'} reset_all</button>
       </div>
 
       {msg && <div style={{ marginTop: '8px', color: msg.ok ? '#4ade80' : '#ef4444', fontSize: '12px' }}>{msg.text}</div>}

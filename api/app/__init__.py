@@ -9,10 +9,11 @@
 #            routes/__init__.py, services/auth_service.py
 # Modified:  2026-03-01
 # ==============================================================================
-from flask import Flask, request, g
+from flask import Flask, request, g, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_cors import CORS
+from werkzeug.exceptions import HTTPException
 import os
 import logging
 from datetime import datetime
@@ -85,6 +86,23 @@ def create_app():
     # Register all blueprints
     from app.routes import register_blueprints
     register_blueprints(app)
+
+    # JSON error handlers (API should never return HTML error pages)
+    @app.errorhandler(400)
+    def bad_request(e):
+        return jsonify({'error': 'Bad request', 'message': str(e.description)}), 400
+
+    @app.errorhandler(404)
+    def not_found(e):
+        return jsonify({'error': 'Not found'}), 404
+
+    @app.errorhandler(405)
+    def method_not_allowed(e):
+        return jsonify({'error': 'Method not allowed'}), 405
+
+    @app.errorhandler(500)
+    def internal_error(e):
+        return jsonify({'error': 'Internal server error'}), 500
 
     # Security status endpoint
     @app.route('/api/security/status', methods=['GET'])
@@ -160,11 +178,10 @@ def create_app():
                 "timestamp": datetime.utcnow().isoformat()
             }, 503
 
-    # Seed admin user on first request
+    # Seed admin user on first request (retries until DB is ready)
     @app.before_request
     def seed_admin_once():
         if not getattr(app, '_admin_seeded', False):
-            app._admin_seeded = True
             try:
                 from app.services.auth_service import AuthService
                 AuthService.seed_admin(
@@ -172,6 +189,7 @@ def create_app():
                     email=Config.ADMIN_EMAIL,
                     password=Config.ADMIN_PASSWORD
                 )
+                app._admin_seeded = True
             except Exception as e:
                 security_logger.warning(f"Admin seed skipped: {str(e)}")
 

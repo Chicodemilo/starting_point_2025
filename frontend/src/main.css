@@ -1,0 +1,139 @@
+/* =============================================================================
+   File:      frontend/src/main.css
+   Purpose:   CSS custom property token definitions for light and dark themes.
+              All UI color values reference these tokens via var(--token-name)
+              in inline styles. Dark mode is activated by setting
+              data-theme="dark" on the <html> element.
+   Callers:   main.jsx (imported globally)
+   Modified:  2026-03-03
+   ============================================================================= */
+
+:root {
+  color: #2c3e50;
+
+  /* Backgrounds */
+  --bg-page:             #f5f3f0;
+  --bg-page-public:      #f5f5f5;
+  --bg-surface:          #ffffff;
+  --bg-surface-alt:      #f8f9fa;
+  --bg-input:            #ffffff;
+  --bg-hover:            #f0f7ff;
+  --bg-highlight:        #f0f8ff;
+  --bg-overlay:          rgba(0,0,0,0.5);
+
+  /* Text */
+  --text-primary:        #2c3e50;
+  --text-secondary:      #555555;
+  --text-muted:          #7f8c8d;
+  --text-faint:          #95a5a6;
+  --text-on-brand:       #ffffff;
+  --text-table-header:   #6c757d;
+
+  /* Borders */
+  --border-primary:      #dee2e6;
+  --border-medium:       #e0e0e0;
+  --border-light:        #eeeeee;
+  --border-input:        #bdc3c7;
+  --border-input-light:  #dddddd;
+
+  /* Brand / Action */
+  --brand-primary:       #3498db;
+  --brand-success:       #27ae60;
+  --brand-danger:        #e74c3c;
+  --brand-warning:       #e67e22;
+  --brand-purple:        #9b59b6;
+
+  /* Semantic Surfaces */
+  --bg-error:            #f8d7da;
+  --text-error:          #721c24;
+  --bg-error-alt:        #fde8e8;
+  --bg-badge-neutral:    #e9ecef;
+  --text-badge-neutral:  #495057;
+
+  /* Role Badges */
+  --bg-badge-owner:      #d4edda;
+  --text-badge-owner:    #155724;
+  --bg-badge-admin:      #cce5ff;
+  --bg-badge-member:     #e9ecef;
+  --bg-badge-role:       #e2e8f0;
+  --text-badge-role:     #4a5568;
+
+  /* Messages */
+  --bg-msg-received:     #f0f0f0;
+  --bg-msg-sent:         #3498db;
+
+  /* Shadows */
+  --shadow-card:         0 4px 6px rgba(0,0,0,0.1);
+}
+
+[data-theme="dark"] {
+  color: #e0e0e0;
+  color-scheme: dark;
+
+  /* Backgrounds */
+  --bg-page:             #121212;
+  --bg-page-public:      #121212;
+  --bg-surface:          #1e1e1e;
+  --bg-surface-alt:      #252525;
+  --bg-input:            #2a2a2a;
+  --bg-hover:            #1a2a3a;
+  --bg-highlight:        #1a2535;
+  --bg-overlay:          rgba(0,0,0,0.7);
+
+  /* Text */
+  --text-primary:        #e0e0e0;
+  --text-secondary:      #b0b0b0;
+  --text-muted:          #8a8a8a;
+  --text-faint:          #666666;
+  --text-on-brand:       #ffffff;
+  --text-table-header:   #9a9a9a;
+
+  /* Borders */
+  --border-primary:      #333333;
+  --border-medium:       #2a2a2a;
+  --border-light:        #2a2a2a;
+  --border-input:        #444444;
+  --border-input-light:  #3a3a3a;
+
+  /* Brand / Action */
+  --brand-primary:       #5dade2;
+  --brand-success:       #2ecc71;
+  --brand-danger:        #e74c3c;
+  --brand-warning:       #f39c12;
+  --brand-purple:        #bb8fce;
+
+  /* Semantic Surfaces */
+  --bg-error:            #3b1a1a;
+  --text-error:          #f5a0a0;
+  --bg-error-alt:        #3b1a1a;
+  --bg-badge-neutral:    #333333;
+  --text-badge-neutral:  #c0c0c0;
+
+  /* Role Badges */
+  --bg-badge-owner:      #1a3a2a;
+  --text-badge-owner:    #80d0a0;
+  --bg-badge-admin:      #1a2a3a;
+  --bg-badge-member:     #333333;
+  --bg-badge-role:       #2a3040;
+  --text-badge-role:     #a0b0c0;
+
+  /* Messages */
+  --bg-msg-received:     #2a2a2a;
+  --bg-msg-sent:         #2a6496;
+
+  /* Shadows */
+  --shadow-card:         0 4px 6px rgba(0,0,0,0.3);
+}
+
+/* Dark mode form element overrides (browsers apply white bg to inputs) */
+[data-theme="dark"] input,
+[data-theme="dark"] select,
+[data-theme="dark"] textarea {
+  background-color: var(--bg-input);
+  color: var(--text-primary);
+  border-color: var(--border-input-light);
+}
+
+[data-theme="dark"] input::placeholder {
+  color: var(--text-faint);
+}

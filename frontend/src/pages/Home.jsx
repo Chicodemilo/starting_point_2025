@@ -5,7 +5,7 @@
 //            authenticated users. Redirects to terms if not yet accepted.
 // Callers:   App.jsx (route: /)
 // Callees:   React, react-router-dom, authStore.js
-// Modified:  2026-03-01
+// Modified:  2026-03-03
 // ==============================================================================
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -26,8 +26,8 @@ function Home() {
   return (
     <div style={{ padding: '20px', maxWidth: '800px', margin: '0 auto' }}>
       <header style={{ textAlign: 'center', padding: '40px 20px', marginBottom: '20px' }}>
-        <h1 style={{ fontSize: '2.5em', margin: '0 0 10px 0', color: '#2c3e50' }}>{APP_NAME}</h1>
-        <p style={{ color: '#7f8c8d', fontSize: '1.1em' }}>
+        <h1 style={{ fontSize: '2.5em', margin: '0 0 10px 0', color: 'var(--text-primary)' }}>{APP_NAME}</h1>
+        <p style={{ color: 'var(--text-muted)', fontSize: '1.1em' }}>
           {isAuthenticated() ? `Welcome back, ${user?.username}!` : 'Welcome! Please log in or register.'}
         </p>
       </header>
@@ -35,7 +35,7 @@ function Home() {
       {!isAuthenticated() && (
         <div style={{ display: 'flex', gap: '16px', justifyContent: 'center' }}>
           <a href="/login" style={buttonStyle}>Log In</a>
-          <a href="/register" style={{ ...buttonStyle, backgroundColor: '#27ae60' }}>Register</a>
+          <a href="/register" style={{ ...buttonStyle, backgroundColor: 'var(--brand-success)' }}>Register</a>
         </div>
       )}
 
@@ -62,8 +62,8 @@ function Home() {
 const buttonStyle = {
   display: 'inline-block',
   padding: '12px 32px',
-  backgroundColor: '#3498db',
-  color: 'white',
+  backgroundColor: 'var(--brand-primary)',
+  color: 'var(--text-on-brand)',
   textDecoration: 'none',
   borderRadius: '6px',
   fontSize: '16px',
@@ -73,11 +73,11 @@ const buttonStyle = {
 const cardStyle = {
   display: 'block',
   padding: '24px',
-  backgroundColor: '#f8f9fa',
+  backgroundColor: 'var(--bg-surface-alt)',
   borderRadius: '8px',
-  border: '1px solid #dee2e6',
+  border: '1px solid var(--border-primary)',
   textDecoration: 'none',
-  color: '#2c3e50'
+  color: 'var(--text-primary)'
 };
 
 export default Home;

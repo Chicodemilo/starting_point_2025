@@ -4,77 +4,70 @@
 //            invite code, and member list. Provides a manage link for
 //            the group owner.
 // Callers:   App.jsx (route: /groups/:id)
-// Callees:   React, react-router-dom, groupStore.js, authStore.js
-// Modified:  2026-03-01
+// Callees:   React, react-router-dom, groupStore.js, authStore.js,
+//            PageHeader.jsx, ContentCard.jsx
+// Modified:  2026-03-03
 // ==============================================================================
 import React, { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import useGroupStore from '../store/groupStore';
 import useAuthStore from '../store/authStore';
+import PageHeader from '../components/PageHeader';
+import ContentCard from '../components/ContentCard';
+
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5151';
 
 function GroupDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { user } = useAuthStore();
-  const { currentGroup, fetchGroup, deleteGroup, loading } = useGroupStore();
+  const { currentGroup, fetchGroup, loading } = useGroupStore();
 
   useEffect(() => { fetchGroup(id); }, [id]);
 
   if (loading || !currentGroup) return <div style={{ padding: '20px' }}>Loading...</div>;
 
+  const manageBtn = currentGroup.owner_id === user?.id ? (
+    <button onClick={() => navigate(`/groups/${id}/admin`)}
+      style={{ padding: '8px 16px', backgroundColor: 'var(--bg-surface-alt)', border: '1px solid var(--border-primary)', borderRadius: '6px', cursor: 'pointer', fontSize: '13px', color: 'var(--text-secondary)' }}>
+      Manage Group
+    </button>
+  ) : null;
+
+  const subtitle = `${currentGroup.type} · ${currentGroup.is_private ? 'Private' : 'Public'}`;
+
   return (
-    <div style={{ padding: '20px', maxWidth: '800px', margin: '0 auto' }}>
-      <button onClick={() => navigate('/groups')} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#3498db', marginBottom: '16px' }}>
-        &larr; Back to Groups
-      </button>
+    <div>
+      <PageHeader title={currentGroup.name} subtitle={subtitle} action={manageBtn} />
 
-      <div style={{ marginBottom: '24px' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '8px' }}>
-          {currentGroup.icon ? (
-            <img src={`${import.meta.env.VITE_API_URL || 'http://localhost:5151'}/api/uploads/group_icons/${currentGroup.icon}_md.jpg`}
-              alt="icon" style={{ width: '48px', height: '48px', borderRadius: '8px', objectFit: 'cover' }} />
-          ) : (
-            <div style={{ width: '48px', height: '48px', borderRadius: '8px', backgroundColor: '#3498db', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '22px', fontWeight: '600' }}>
-              {currentGroup.name.charAt(0).toUpperCase()}
+      <div style={contentArea}>
+        {currentGroup.description && (
+          <ContentCard>
+            <p style={{ margin: 0, color: 'var(--text-secondary)' }}>{currentGroup.description}</p>
+          </ContentCard>
+        )}
+
+        {currentGroup.invite_code && (
+          <ContentCard style={{ backgroundColor: 'var(--bg-highlight)' }}>
+            <strong>Invite Code:</strong> <code style={{ fontSize: '18px', marginLeft: '8px' }}>{currentGroup.invite_code}</code>
+          </ContentCard>
+        )}
+
+        <h3 style={{ margin: '24px 0 12px', fontSize: '16px', color: 'var(--text-primary)' }}>Members ({currentGroup.members?.length || 0})</h3>
+        <ContentCard style={{ padding: 0 }}>
+          {currentGroup.members?.map((member, i) => (
+            <div key={member.id} style={{ padding: '10px 20px', display: 'flex', justifyContent: 'space-between', borderBottom: i < currentGroup.members.length - 1 ? '1px solid var(--border-light)' : 'none' }}>
+              <span>{member.username}</span>
+              <span style={roleBadge}>{member.role}</span>
             </div>
-          )}
-          <div>
-            <h1 style={{ margin: 0 }}>{currentGroup.name}</h1>
-            <div>
-              <span style={typeBadge}>{currentGroup.type}</span>
-              <span style={{ marginLeft: '8px', color: '#7f8c8d' }}>{currentGroup.is_private ? 'Private' : 'Public'}</span>
-            </div>
-          </div>
-          {currentGroup.owner_id === user?.id && (
-            <button onClick={() => navigate(`/groups/${id}/admin`)}
-              style={{ marginLeft: 'auto', padding: '8px 16px', backgroundColor: '#f8f9fa', border: '1px solid #dee2e6', borderRadius: '6px', cursor: 'pointer', fontSize: '13px', color: '#555' }}>
-              Manage Group
-            </button>
-          )}
-        </div>
-        <p style={{ marginTop: '12px', color: '#555' }}>{currentGroup.description}</p>
+          ))}
+        </ContentCard>
       </div>
-
-      {currentGroup.invite_code && (
-        <div style={{ padding: '16px', backgroundColor: '#f0f8ff', borderRadius: '8px', marginBottom: '24px' }}>
-          <strong>Invite Code:</strong> <code style={{ fontSize: '18px', marginLeft: '8px' }}>{currentGroup.invite_code}</code>
-        </div>
-      )}
-
-      <h2>Members ({currentGroup.members?.length || 0})</h2>
-      <ul style={{ listStyle: 'none', padding: 0 }}>
-        {currentGroup.members?.map(member => (
-          <li key={member.id} style={{ padding: '10px 0', borderBottom: '1px solid #eee', display: 'flex', justifyContent: 'space-between' }}>
-            <span>{member.username}</span>
-            <span style={roleBadge}>{member.role}</span>
-          </li>
-        ))}
-      </ul>
     </div>
   );
 }
 
-const typeBadge = { display: 'inline-block', padding: '2px 10px', backgroundColor: '#e9ecef', borderRadius: '12px', fontSize: '13px' };
-const roleBadge = { padding: '2px 8px', backgroundColor: '#e2e8f0', borderRadius: '4px', fontSize: '12px', color: '#4a5568' };
+const contentArea = { padding: '0 24px 24px' };
+const roleBadge = { padding: '2px 8px', backgroundColor: 'var(--bg-badge-role)', borderRadius: '4px', fontSize: '12px', color: 'var(--text-badge-role)' };
 
 export default GroupDetail;

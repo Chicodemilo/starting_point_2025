@@ -6,7 +6,7 @@
 // Callers:   App.jsx (route: /register)
 // Callees:   React, react-router-dom, authStore.js,
 //            services/validation.js
-// Modified:  2026-03-01
+// Modified:  2026-03-03
 // ==============================================================================
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -41,9 +41,9 @@ function Register() {
   };
 
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#f5f5f5' }}>
-      <div style={{ backgroundColor: 'white', padding: '40px', borderRadius: '12px', boxShadow: '0 4px 6px rgba(0,0,0,0.1)', width: '100%', maxWidth: '400px' }}>
-        <h1 style={{ textAlign: 'center', marginBottom: '30px', color: '#2c3e50' }}>Create Account</h1>
+    <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'var(--bg-page-public)' }}>
+      <div style={{ backgroundColor: 'var(--bg-surface)', padding: '40px', borderRadius: '12px', boxShadow: 'var(--shadow-card)', width: '100%', maxWidth: '400px' }}>
+        <h1 style={{ textAlign: 'center', marginBottom: '30px', color: 'var(--text-primary)' }}>Create Account</h1>
 
         <form onSubmit={handleSubmit}>
           <div style={{ marginBottom: '20px' }}>
@@ -71,7 +71,7 @@ function Register() {
           </button>
         </form>
 
-        <p style={{ textAlign: 'center', marginTop: '20px', color: '#7f8c8d' }}>
+        <p style={{ textAlign: 'center', marginTop: '20px', color: 'var(--text-muted)' }}>
           Already have an account? <a href="/login">Log In</a>
         </p>
       </div>
@@ -79,9 +79,9 @@ function Register() {
   );
 }
 
-const inputStyle = { width: '100%', padding: '12px', border: '2px solid #bdc3c7', borderRadius: '6px', fontSize: '16px', boxSizing: 'border-box' };
-const errorStyle = { backgroundColor: '#f8d7da', color: '#721c24', padding: '10px', borderRadius: '4px', marginBottom: '20px', fontSize: '14px' };
-const fieldErrorStyle = { color: '#e74c3c', fontSize: '13px', marginTop: '4px' };
-const submitStyle = { width: '100%', backgroundColor: '#27ae60', color: 'white', border: 'none', padding: '14px', borderRadius: '6px', fontSize: '16px', cursor: 'pointer' };
+const inputStyle = { width: '100%', padding: '12px', border: '2px solid var(--border-input)', borderRadius: '6px', fontSize: '16px', boxSizing: 'border-box' };
+const errorStyle = { backgroundColor: 'var(--bg-error)', color: 'var(--text-error)', padding: '10px', borderRadius: '4px', marginBottom: '20px', fontSize: '14px' };
+const fieldErrorStyle = { color: 'var(--brand-danger)', fontSize: '13px', marginTop: '4px' };
+const submitStyle = { width: '100%', backgroundColor: 'var(--brand-success)', color: 'var(--text-on-brand)', border: 'none', padding: '14px', borderRadius: '6px', fontSize: '16px', cursor: 'pointer' };
 
 export default Register;

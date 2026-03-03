@@ -5,7 +5,7 @@
 //            email change), and displays success or error status.
 // Callers:   App.jsx (route: /verify-email)
 // Callees:   React, react-router-dom, api/auth.js, api/client.js
-// Modified:  2026-03-01
+// Modified:  2026-03-03
 // ==============================================================================
 import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
@@ -42,30 +42,30 @@ function VerifyEmail() {
   }, [searchParams]);
 
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#f5f5f5' }}>
-      <div style={{ backgroundColor: 'white', padding: '40px', borderRadius: '12px', boxShadow: '0 4px 6px rgba(0,0,0,0.1)', width: '100%', maxWidth: '400px', textAlign: 'center' }}>
+    <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'var(--bg-page-public)' }}>
+      <div style={{ backgroundColor: 'var(--bg-surface)', padding: '40px', borderRadius: '12px', boxShadow: 'var(--shadow-card)', width: '100%', maxWidth: '400px', textAlign: 'center' }}>
         {status === 'verifying' && (
           <>
-            <h1 style={{ color: '#2c3e50' }}>Verifying...</h1>
-            <p style={{ color: '#7f8c8d' }}>Please wait while we verify your email.</p>
+            <h1 style={{ color: 'var(--text-primary)' }}>Verifying...</h1>
+            <p style={{ color: 'var(--text-muted)' }}>Please wait while we verify your email.</p>
           </>
         )}
         {status === 'success' && (
           <>
             <div style={{ fontSize: '48px', marginBottom: '16px' }}>&#10003;</div>
-            <h1 style={{ color: '#27ae60' }}>Email Verified!</h1>
-            <p style={{ color: '#7f8c8d' }}>{message}</p>
-            <a href="/login" style={{ display: 'inline-block', marginTop: '20px', padding: '12px 32px', backgroundColor: '#3498db', color: 'white', textDecoration: 'none', borderRadius: '6px' }}>
+            <h1 style={{ color: 'var(--brand-success)' }}>Email Verified!</h1>
+            <p style={{ color: 'var(--text-muted)' }}>{message}</p>
+            <a href="/login" style={{ display: 'inline-block', marginTop: '20px', padding: '12px 32px', backgroundColor: 'var(--brand-primary)', color: 'var(--text-on-brand)', textDecoration: 'none', borderRadius: '6px' }}>
               Log In
             </a>
           </>
         )}
         {status === 'error' && (
           <>
-            <div style={{ fontSize: '48px', marginBottom: '16px', color: '#e74c3c' }}>&#10007;</div>
-            <h1 style={{ color: '#e74c3c' }}>Verification Failed</h1>
-            <p style={{ color: '#7f8c8d' }}>{message}</p>
-            <a href="/login" style={{ display: 'inline-block', marginTop: '20px', padding: '12px 32px', backgroundColor: '#3498db', color: 'white', textDecoration: 'none', borderRadius: '6px' }}>
+            <div style={{ fontSize: '48px', marginBottom: '16px', color: 'var(--brand-danger)' }}>&#10007;</div>
+            <h1 style={{ color: 'var(--brand-danger)' }}>Verification Failed</h1>
+            <p style={{ color: 'var(--text-muted)' }}>{message}</p>
+            <a href="/login" style={{ display: 'inline-block', marginTop: '20px', padding: '12px 32px', backgroundColor: 'var(--brand-primary)', color: 'var(--text-on-brand)', textDecoration: 'none', borderRadius: '6px' }}>
               Go to Login
             </a>
           </>

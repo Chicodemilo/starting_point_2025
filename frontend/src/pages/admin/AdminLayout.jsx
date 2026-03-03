@@ -55,8 +55,8 @@ function AdminLayout() {
     <div style={t.root}>
       <aside style={t.sidebar}>
         <div style={t.sidebarHeader}>
-          <span style={t.prompt}>$</span> admin_panel
-          <div style={t.userLine}>{adminUser?.email}</div>
+          <span style={t.prompt}>$</span> ADMIN : {import.meta.env.VITE_APP_NAME || 'My App'}
+          <div style={t.userLine}>{adminUser?.username}</div>
         </div>
         <nav style={t.nav}>
           {visibleSections.map(s => (

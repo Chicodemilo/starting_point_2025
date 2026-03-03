@@ -5,7 +5,7 @@
 //            the verification email.
 // Callers:   App.jsx (route: /check-email)
 // Callees:   React, authStore.js, api/auth.js
-// Modified:  2026-03-01
+// Modified:  2026-03-03
 // ==============================================================================
 import React, { useState } from 'react';
 import useAuthStore from '../store/authStore';
@@ -28,27 +28,27 @@ function CheckEmail() {
   };
 
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#f5f5f5' }}>
-      <div style={{ backgroundColor: 'white', padding: '40px', borderRadius: '12px', boxShadow: '0 4px 6px rgba(0,0,0,0.1)', width: '100%', maxWidth: '400px', textAlign: 'center' }}>
+    <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'var(--bg-page-public)' }}>
+      <div style={{ backgroundColor: 'var(--bg-surface)', padding: '40px', borderRadius: '12px', boxShadow: 'var(--shadow-card)', width: '100%', maxWidth: '400px', textAlign: 'center' }}>
         <div style={{ fontSize: '48px', marginBottom: '16px' }}>&#9993;</div>
-        <h1 style={{ color: '#2c3e50' }}>Check Your Email</h1>
-        <p style={{ color: '#7f8c8d', marginBottom: '24px' }}>
+        <h1 style={{ color: 'var(--text-primary)' }}>Check Your Email</h1>
+        <p style={{ color: 'var(--text-muted)', marginBottom: '24px' }}>
           We've sent a verification link to your email address. Click the link to verify your account.
         </p>
 
         {resent ? (
-          <p style={{ color: '#27ae60', fontWeight: '500' }}>Verification email resent!</p>
+          <p style={{ color: 'var(--brand-success)', fontWeight: '500' }}>Verification email resent!</p>
         ) : (
           <button
             onClick={handleResend}
             disabled={resending || !token}
-            style={{ padding: '12px 32px', backgroundColor: '#3498db', color: 'white', border: 'none', borderRadius: '6px', cursor: 'pointer', fontSize: '14px' }}
+            style={{ padding: '12px 32px', backgroundColor: 'var(--brand-primary)', color: 'var(--text-on-brand)', border: 'none', borderRadius: '6px', cursor: 'pointer', fontSize: '14px' }}
           >
             {resending ? 'Sending...' : 'Resend Email'}
           </button>
         )}
 
-        <p style={{ marginTop: '24px', color: '#7f8c8d', fontSize: '14px' }}>
+        <p style={{ marginTop: '24px', color: 'var(--text-muted)', fontSize: '14px' }}>
           <a href="/login">Back to Login</a>
         </p>
       </div>

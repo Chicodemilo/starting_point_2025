@@ -5,7 +5,7 @@
 //            terms page on success.
 // Callers:   App.jsx (route: /login)
 // Callees:   React, react-router-dom, authStore.js
-// Modified:  2026-03-01
+// Modified:  2026-03-03
 // ==============================================================================
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -24,7 +24,7 @@ function Login() {
       if (data.user && !data.user.terms_accepted) {
         navigate('/terms');
       } else {
-        navigate('/');
+        navigate('/dashboard');
       }
     } catch {
       // Error is set in store
@@ -32,9 +32,9 @@ function Login() {
   };
 
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#f5f5f5' }}>
-      <div style={{ backgroundColor: 'white', padding: '40px', borderRadius: '12px', boxShadow: '0 4px 6px rgba(0,0,0,0.1)', width: '100%', maxWidth: '400px' }}>
-        <h1 style={{ textAlign: 'center', marginBottom: '30px', color: '#2c3e50' }}>Log In</h1>
+    <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'var(--bg-page-public)' }}>
+      <div style={{ backgroundColor: 'var(--bg-surface)', padding: '40px', borderRadius: '12px', boxShadow: 'var(--shadow-card)', width: '100%', maxWidth: '400px' }}>
+        <h1 style={{ textAlign: 'center', marginBottom: '30px', color: 'var(--text-primary)' }}>Log In</h1>
 
         <form onSubmit={handleSubmit}>
           <div style={{ marginBottom: '20px' }}>
@@ -67,7 +67,7 @@ function Login() {
           </button>
         </form>
 
-        <p style={{ textAlign: 'center', marginTop: '20px', color: '#7f8c8d' }}>
+        <p style={{ textAlign: 'center', marginTop: '20px', color: 'var(--text-muted)' }}>
           Don't have an account? <a href="/register">Register</a>
         </p>
       </div>
@@ -75,8 +75,8 @@ function Login() {
   );
 }
 
-const inputStyle = { width: '100%', padding: '12px', border: '2px solid #bdc3c7', borderRadius: '6px', fontSize: '16px', boxSizing: 'border-box' };
-const errorStyle = { backgroundColor: '#f8d7da', color: '#721c24', padding: '10px', borderRadius: '4px', marginBottom: '20px', fontSize: '14px' };
-const submitStyle = { width: '100%', backgroundColor: '#2c3e50', color: 'white', border: 'none', padding: '14px', borderRadius: '6px', fontSize: '16px', cursor: 'pointer' };
+const inputStyle = { width: '100%', padding: '12px', border: '2px solid var(--border-input)', borderRadius: '6px', fontSize: '16px', boxSizing: 'border-box' };
+const errorStyle = { backgroundColor: 'var(--bg-error)', color: 'var(--text-error)', padding: '10px', borderRadius: '4px', marginBottom: '20px', fontSize: '14px' };
+const submitStyle = { width: '100%', backgroundColor: 'var(--brand-primary)', color: 'var(--text-on-brand)', border: 'none', padding: '14px', borderRadius: '6px', fontSize: '16px', cursor: 'pointer' };
 
 export default Login;

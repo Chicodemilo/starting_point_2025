@@ -4,13 +4,17 @@
 //            capability, email change form with verification flow, and
 //            a logout button.
 // Callers:   App.jsx (route: /profile)
-// Callees:   React, react-router-dom, authStore.js, api/auth.js
-// Modified:  2026-03-01
+// Callees:   React, react-router-dom, authStore.js, themeStore.js,
+//            api/auth.js, PageHeader.jsx, ContentCard.jsx
+// Modified:  2026-03-03
 // ==============================================================================
 import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useAuthStore from '../store/authStore';
 import { changeEmail, uploadAvatar } from '../api/auth';
+import useThemeStore from '../store/themeStore';
+import PageHeader from '../components/PageHeader';
+import ContentCard from '../components/ContentCard';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5151';
 
@@ -21,6 +25,7 @@ function avatarUrl(user, size = 'md') {
 
 function Profile() {
   const { user, logout, refreshProfile } = useAuthStore();
+  const { theme, toggle } = useThemeStore();
   const navigate = useNavigate();
   const fileRef = useRef(null);
   const [newEmail, setNewEmail] = useState('');
@@ -74,77 +79,93 @@ function Profile() {
   const src = avatarUrl(user);
 
   return (
-    <div style={{ padding: '20px', maxWidth: '600px', margin: '0 auto' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
-        <h1 style={{ margin: 0, color: '#2c3e50' }}>Profile</h1>
-        <a href="/" style={{ color: '#3498db', textDecoration: 'none' }}>Back to Home</a>
-      </div>
+    <div>
+      <PageHeader title="Profile" />
 
-      {/* User Info Card */}
-      <div style={cardStyle}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '20px' }}>
-          <div style={{ position: 'relative', cursor: 'pointer' }} onClick={() => fileRef.current?.click()}>
-            {src ? (
-              <img src={src} alt="avatar" style={avatarImgStyle} />
-            ) : (
-              <div style={avatarStyle}>{user.username.charAt(0).toUpperCase()}</div>
-            )}
-            <div style={avatarOverlay}>{uploading ? '...' : 'Edit'}</div>
-            <input ref={fileRef} type="file" accept="image/jpeg,image/png" onChange={handleAvatarChange} style={{ display: 'none' }} />
-          </div>
-          <div>
-            <h2 style={{ margin: 0 }}>{user.username}</h2>
-            <p style={{ margin: '4px 0 0', color: '#7f8c8d' }}>{user.email}</p>
-          </div>
-        </div>
-
-        <div style={{ display: 'grid', gap: '12px' }}>
-          <div style={infoRow}>
-            <span style={{ color: '#7f8c8d' }}>Email Verified</span>
-            <span style={{ color: user.email_verified ? '#27ae60' : '#e67e22', fontWeight: '500' }}>
-              {user.email_verified ? 'Yes' : 'No'}
-            </span>
-          </div>
-          {user.pending_email && (
-            <div style={infoRow}>
-              <span style={{ color: '#7f8c8d' }}>Pending Email Change</span>
-              <span style={{ color: '#e67e22', fontWeight: '500' }}>{user.pending_email}</span>
+      <div style={contentArea}>
+        <ContentCard>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '20px' }}>
+            <div style={{ position: 'relative', cursor: 'pointer' }} onClick={() => fileRef.current?.click()}>
+              {src ? (
+                <img src={src} alt="avatar" style={avatarImgStyle} />
+              ) : (
+                <div style={avatarStyle}>{user.username.charAt(0).toUpperCase()}</div>
+              )}
+              <div style={avatarOverlay}>{uploading ? '...' : 'Edit'}</div>
+              <input ref={fileRef} type="file" accept="image/jpeg,image/png" onChange={handleAvatarChange} style={{ display: 'none' }} />
             </div>
-          )}
-          <div style={infoRow}>
-            <span style={{ color: '#7f8c8d' }}>Member Since</span>
-            <span>{user.created_at ? new Date(user.created_at).toLocaleDateString() : '—'}</span>
+            <div>
+              <h2 style={{ margin: 0 }}>{user.username}</h2>
+              <p style={{ margin: '4px 0 0', color: 'var(--text-muted)' }}>{user.email}</p>
+            </div>
           </div>
-        </div>
-      </div>
 
-      {/* Change Email */}
-      <div style={{ ...cardStyle, marginTop: '16px' }}>
-        <h3 style={{ margin: '0 0 12px' }}>Change Email</h3>
-        <form onSubmit={handleChangeEmail} style={{ display: 'flex', gap: '8px' }}>
-          <input type="email" placeholder="New email address" value={newEmail} onChange={(e) => setNewEmail(e.target.value)}
-            style={{ flex: 1, padding: '10px', borderRadius: '6px', border: '1px solid #ddd', fontSize: '14px' }} />
-          <button type="submit" disabled={submitting || !newEmail} style={{ ...btnStyle, backgroundColor: '#3498db', opacity: submitting || !newEmail ? 0.6 : 1 }}>
-            {submitting ? 'Sending...' : 'Update'}
-          </button>
-        </form>
-        {emailMsg && <p style={{ color: '#27ae60', marginTop: '8px', fontSize: '14px' }}>{emailMsg}</p>}
-        {emailErr && <p style={{ color: '#e74c3c', marginTop: '8px', fontSize: '14px' }}>{emailErr}</p>}
-      </div>
+          <div style={{ display: 'grid', gap: '12px' }}>
+            <div style={infoRow}>
+              <span style={{ color: 'var(--text-muted)' }}>Email Verified</span>
+              <span style={{ color: user.email_verified ? 'var(--brand-success)' : 'var(--brand-warning)', fontWeight: '500' }}>
+                {user.email_verified ? 'Yes' : 'No'}
+              </span>
+            </div>
+            {user.pending_email && (
+              <div style={infoRow}>
+                <span style={{ color: 'var(--text-muted)' }}>Pending Email Change</span>
+                <span style={{ color: 'var(--brand-warning)', fontWeight: '500' }}>{user.pending_email}</span>
+              </div>
+            )}
+            <div style={infoRow}>
+              <span style={{ color: 'var(--text-muted)' }}>Member Since</span>
+              <span>{user.created_at ? new Date(user.created_at).toLocaleDateString() : '—'}</span>
+            </div>
+          </div>
+        </ContentCard>
 
-      {/* Logout */}
-      <button onClick={handleLogout} style={{ ...btnStyle, backgroundColor: '#e74c3c', marginTop: '24px', width: '100%', padding: '14px' }}>
-        Log Out
-      </button>
+        <ContentCard>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div>
+              <div style={{ fontWeight: '500' }}>Dark Mode</div>
+              <div style={{ fontSize: '13px', color: 'var(--text-muted)', marginTop: '2px' }}>
+                {theme === 'dark' ? 'On' : 'Off'}
+              </div>
+            </div>
+            <button
+              onClick={toggle}
+              style={toggleTrack(theme === 'dark')}
+              aria-label="Toggle dark mode"
+            >
+              <span style={toggleKnob(theme === 'dark')} />
+            </button>
+          </div>
+        </ContentCard>
+
+        <ContentCard>
+          <h3 style={{ margin: '0 0 12px' }}>Change Email</h3>
+          <form onSubmit={handleChangeEmail} style={{ display: 'flex', gap: '8px' }}>
+            <input type="email" placeholder="New email address" value={newEmail} onChange={(e) => setNewEmail(e.target.value)}
+              style={{ flex: 1, padding: '10px', borderRadius: '6px', border: '1px solid var(--border-input-light)', fontSize: '14px' }} />
+            <button type="submit" disabled={submitting || !newEmail} style={{ ...btnStyle, backgroundColor: 'var(--brand-primary)', opacity: submitting || !newEmail ? 0.6 : 1 }}>
+              {submitting ? 'Sending...' : 'Update'}
+            </button>
+          </form>
+          {emailMsg && <p style={{ color: 'var(--brand-success)', marginTop: '8px', fontSize: '14px' }}>{emailMsg}</p>}
+          {emailErr && <p style={{ color: 'var(--brand-danger)', marginTop: '8px', fontSize: '14px' }}>{emailErr}</p>}
+        </ContentCard>
+
+        <button onClick={handleLogout} style={{ ...btnStyle, backgroundColor: 'var(--brand-danger)', width: '100%', padding: '14px' }}>
+          Log Out
+        </button>
+      </div>
     </div>
   );
 }
 
-const cardStyle = { padding: '24px', backgroundColor: '#f8f9fa', borderRadius: '8px', border: '1px solid #dee2e6' };
-const avatarStyle = { width: '56px', height: '56px', borderRadius: '50%', backgroundColor: '#3498db', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '24px', fontWeight: '600' };
+const contentArea = { padding: '0 24px 24px' };
+const avatarStyle = { width: '56px', height: '56px', borderRadius: '50%', backgroundColor: 'var(--brand-primary)', color: 'var(--text-on-brand)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '24px', fontWeight: '600' };
 const avatarImgStyle = { width: '56px', height: '56px', borderRadius: '50%', objectFit: 'cover' };
-const avatarOverlay = { position: 'absolute', bottom: 0, left: 0, right: 0, backgroundColor: 'rgba(0,0,0,0.5)', color: 'white', fontSize: '10px', textAlign: 'center', borderRadius: '0 0 28px 28px', padding: '2px 0' };
-const infoRow = { display: 'flex', justifyContent: 'space-between', padding: '8px 0', borderBottom: '1px solid #eee' };
-const btnStyle = { padding: '10px 20px', color: 'white', border: 'none', borderRadius: '6px', cursor: 'pointer', fontSize: '14px', fontWeight: '500' };
+const avatarOverlay = { position: 'absolute', bottom: 0, left: 0, right: 0, backgroundColor: 'var(--bg-overlay)', color: 'var(--text-on-brand)', fontSize: '10px', textAlign: 'center', borderRadius: '0 0 28px 28px', padding: '2px 0' };
+const infoRow = { display: 'flex', justifyContent: 'space-between', padding: '8px 0', borderBottom: '1px solid var(--border-light)' };
+const btnStyle = { padding: '10px 20px', color: 'var(--text-on-brand)', border: 'none', borderRadius: '6px', cursor: 'pointer', fontSize: '14px', fontWeight: '500' };
+const toggleTrack = (on) => ({ width: '44px', height: '24px', borderRadius: '12px', border: 'none', backgroundColor: on ? 'var(--brand-primary)' : 'var(--border-input)', cursor: 'pointer', position: 'relative', padding: 0, transition: 'background-color 0.2s' });
+const toggleKnob = (on) => ({ display: 'block', width: '18px', height: '18px', borderRadius: '50%', backgroundColor: 'white', position: 'absolute', top: '3px', left: on ? '23px' : '3px', transition: 'left 0.2s' });
 
 export default Profile;

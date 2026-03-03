@@ -6,7 +6,7 @@
 // Callers:   App.jsx (route: /group-picker)
 // Callees:   React, react-router-dom, authStore.js, groupStore.js,
 //            api/auth.js
-// Modified:  2026-03-01
+// Modified:  2026-03-03
 // ==============================================================================
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -34,12 +34,12 @@ function GroupPicker() {
   return (
     <div style={{ padding: '20px', maxWidth: '600px', margin: '0 auto' }}>
       <h1>Select Active Group</h1>
-      <p style={{ color: '#7f8c8d', marginBottom: '24px' }}>
+      <p style={{ color: 'var(--text-muted)', marginBottom: '24px' }}>
         Choose a group to use as your active context for alerts and messaging.
       </p>
 
       {user?.active_group_id && (
-        <button onClick={handleClear} style={{ marginBottom: '16px', padding: '8px 16px', backgroundColor: '#95a5a6', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>
+        <button onClick={handleClear} style={{ marginBottom: '16px', padding: '8px 16px', backgroundColor: 'var(--text-faint)', color: 'var(--text-on-brand)', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>
           Clear Active Group
         </button>
       )}
@@ -53,18 +53,18 @@ function GroupPicker() {
           {groups.map(group => (
             <div key={group.id} style={{
               ...groupRow,
-              borderColor: user?.active_group_id === group.id ? '#3498db' : '#dee2e6',
+              borderColor: user?.active_group_id === group.id ? 'var(--brand-primary)' : 'var(--border-primary)',
               borderWidth: user?.active_group_id === group.id ? '2px' : '1px',
             }}>
               <div>
                 <strong>{group.name}</strong>
-                <span style={{ color: '#7f8c8d', marginLeft: '8px', fontSize: '13px' }}>{group.type}</span>
+                <span style={{ color: 'var(--text-muted)', marginLeft: '8px', fontSize: '13px' }}>{group.type}</span>
                 {user?.active_group_id === group.id && (
-                  <span style={{ marginLeft: '8px', backgroundColor: '#3498db', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '11px' }}>Active</span>
+                  <span style={{ marginLeft: '8px', backgroundColor: 'var(--brand-primary)', color: 'var(--text-on-brand)', padding: '2px 8px', borderRadius: '10px', fontSize: '11px' }}>Active</span>
                 )}
               </div>
               {user?.active_group_id !== group.id && (
-                <button onClick={() => handleSetActive(group.id)} style={{ padding: '6px 16px', backgroundColor: '#3498db', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer', fontSize: '13px' }}>
+                <button onClick={() => handleSetActive(group.id)} style={{ padding: '6px 16px', backgroundColor: 'var(--brand-primary)', color: 'var(--text-on-brand)', border: 'none', borderRadius: '4px', cursor: 'pointer', fontSize: '13px' }}>
                   Set Active
                 </button>
               )}

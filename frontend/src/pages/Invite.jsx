@@ -5,7 +5,7 @@
 //            the invite token from the URL query string.
 // Callers:   App.jsx (route: /invite)
 // Callees:   React, react-router-dom, authStore.js, api/auth.js
-// Modified:  2026-03-01
+// Modified:  2026-03-03
 // ==============================================================================
 import React, { useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
@@ -45,25 +45,25 @@ function Invite() {
   if (!token) {
     return (
       <div style={{ padding: '40px', textAlign: 'center', maxWidth: '500px', margin: '0 auto' }}>
-        <h1 style={{ color: '#e74c3c' }}>Invalid Invite</h1>
+        <h1 style={{ color: 'var(--brand-danger)' }}>Invalid Invite</h1>
         <p>No invite token provided.</p>
-        <a href="/" style={{ color: '#3498db' }}>Go Home</a>
+        <a href="/" style={{ color: 'var(--brand-primary)' }}>Go Home</a>
       </div>
     );
   }
 
   return (
     <div style={{ padding: '20px', maxWidth: '400px', margin: '60px auto' }}>
-      <h1 style={{ textAlign: 'center', color: '#2c3e50', marginBottom: '8px' }}>Accept Invite</h1>
-      <p style={{ textAlign: 'center', color: '#7f8c8d', marginBottom: '24px' }}>Create your account to get started.</p>
+      <h1 style={{ textAlign: 'center', color: 'var(--text-primary)', marginBottom: '8px' }}>Accept Invite</h1>
+      <p style={{ textAlign: 'center', color: 'var(--text-muted)', marginBottom: '24px' }}>Create your account to get started.</p>
 
-      {error && <div style={{ padding: '12px', backgroundColor: '#fde8e8', color: '#e74c3c', borderRadius: '6px', marginBottom: '16px', fontSize: '14px' }}>{error}</div>}
+      {error && <div style={{ padding: '12px', backgroundColor: 'var(--bg-error-alt)', color: 'var(--brand-danger)', borderRadius: '6px', marginBottom: '16px', fontSize: '14px' }}>{error}</div>}
 
       <form onSubmit={handleSubmit}>
         <input type="text" placeholder="Choose a username" value={username} onChange={(e) => setUsername(e.target.value)} required style={inputStyle} />
         <input type="password" placeholder="Password (min 6 chars)" value={password} onChange={(e) => setPassword(e.target.value)} required minLength={6} style={inputStyle} />
         <input type="password" placeholder="Confirm password" value={confirm} onChange={(e) => setConfirm(e.target.value)} required style={inputStyle} />
-        <button type="submit" disabled={loading} style={{ ...inputStyle, backgroundColor: '#27ae60', color: 'white', border: 'none', cursor: loading ? 'default' : 'pointer', fontWeight: '500', opacity: loading ? 0.6 : 1 }}>
+        <button type="submit" disabled={loading} style={{ ...inputStyle, backgroundColor: 'var(--brand-success)', color: 'var(--text-on-brand)', border: 'none', cursor: loading ? 'default' : 'pointer', fontWeight: '500', opacity: loading ? 0.6 : 1 }}>
           {loading ? 'Creating Account...' : 'Create Account'}
         </button>
       </form>
@@ -71,6 +71,6 @@ function Invite() {
   );
 }
 
-const inputStyle = { width: '100%', padding: '12px', borderRadius: '6px', border: '1px solid #ddd', fontSize: '14px', marginBottom: '12px', boxSizing: 'border-box' };
+const inputStyle = { width: '100%', padding: '12px', borderRadius: '6px', border: '1px solid var(--border-input-light)', fontSize: '14px', marginBottom: '12px', boxSizing: 'border-box' };
 
 export default Invite;

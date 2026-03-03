@@ -189,6 +189,8 @@ def create_app():
                     email=Config.ADMIN_EMAIL,
                     password=Config.ADMIN_PASSWORD
                 )
+                from app.services.seed_service import seed_demo_data
+                seed_demo_data()
                 app._admin_seeded = True
             except Exception as e:
                 security_logger.warning(f"Admin seed skipped: {str(e)}")
